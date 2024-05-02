@@ -4,3 +4,5 @@
 *.pt 
 __pycache__
 *.pyc 
+
+COCO_Football Pixel.json
