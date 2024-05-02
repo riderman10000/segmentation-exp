@@ -41,7 +41,7 @@ def train(epoch, model, batch_size, image_size, data_loader, optimizer,  device 
         accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
         train_accuracy += (100 - accuracy)
 
-    if epoch %10 ==0 :
+    if (epoch + 1) %10 ==0 :
         path_to_fig = os.path.join(save_dirs, 'train_pred')
         os.makedirs( path_to_fig, exist_ok=True)
 
@@ -60,7 +60,7 @@ def train(epoch, model, batch_size, image_size, data_loader, optimizer,  device 
         plt.axis('off')
         plt.title("Truth")
 
-        plt.savefig(os.path.join(path_to_fig, f'image_{epoch}.jpg'))
+        plt.savefig(os.path.join(path_to_fig, f'image_{epoch+1}.jpg'))
         # plt.show()
     return train_loss / len(data_loader), train_accuracy/len(data_loader)
 
@@ -81,7 +81,7 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
             accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
             infer_accuracy += (100 - accuracy)
         
-        if epoch %10 ==0 :
+        if (epoch+1) %10 ==0 :
             path_to_fig = os.path.join(save_dirs, 'train_pred')
             os.makedirs( path_to_fig, exist_ok=True)
 
@@ -100,35 +100,58 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
             plt.axis('off')
             plt.title("Truth")
 
-            plt.savefig(os.path.join(path_to_fig, f'image_{epoch}.jpg'))
+            plt.savefig(os.path.join(path_to_fig, f'image_{epoch+1}.jpg'))
             # plt.show()
         return infer_loss / len(data_loader), infer_accuracy/len(data_loader)
 
-    
-
-
-
-
-
 
 if __name__ == "__main__":
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    batch_size = 4 
     image_size = 512 
-    learning_rate = 0.0003
     epochs = 100
-    pretrain =  None # './runs/exp1/seg.pt'#
-    save_dirs = './runs/exp2/'
+    batch_size = 4 
+    learning_rate = 0.0003
+    
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    pretrain = None # './runs/exp3/seg.pt' #
+    
+    n_times = 2 # increase the datasize by n times
 
+    save_dirs = './runs/exp-aug/iteration-1/'
 
     transformations = A.Compose([
         A.Resize(image_size, image_size),
+        A.HorizontalFlip(p=0.5),
+        A.VerticalFlip(p=0.5),
+        # A.Blur(blur_limit=(1, 5), p=0.6),
+        # A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
+        # A.RandomBrightnessContrast(p=0.5),
+        # A.Sharpen(alpha=(0.2, 0.5), lightness=(0.5, 1.0), p=0.6),
+        # A.Rotate(limit=(-90, 90), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None, rotate_method='largest_box', crop_border=False, p=1.0),
+        # A.SafeRotate(limit=(-45, 45), interpolation=0, border_mode=0, value=(0, 0, 0), p=0.6),
         # A.augmentations.transforms.Normalize
-        ToTensorV2()
+        # A.ChannelShuffle(p=0.8),
+        ToTensorV2(),
     ])
 
+    os.makedirs(save_dirs, exist_ok=True)
+    log_stream = open(os.path.join(save_dirs, 'train_log.txt'), 'w+')
+    log_stream.write(
+        f"Image Size: {image_size}\n" \
+        "Total Number of Epochs: {epochs}\n"\
+        "Batch Size: {batch_size}\n"\
+        "Learning rate: {learning_rate}\n"\
+        "data : {n_times} \n"\
+        "Device : {device}\n"\
+        "pretrain : {pretrain}\n"\
+        "Save directory : {save_dirs}\n"
+    )
+
+    log_stream.write('Used augmentation transformations\n')
+    for aug_idx, augmentation in enumerate(transformations.to_dict()['transform']['transforms']):
+        log_stream.write(f"{aug_idx}. {augmentation['__class_fullname__']}\n")
+
     # loading the dataset
-    football_dataset = FootballDataset('./images', transformations=transformations)
+    football_dataset = FootballDataset('./images', transformations=transformations, n_times=n_times)
     train_valid_test_split_value = list(map(lambda x : int(x * len(football_dataset)), [0.8, 0.15, .05]))
     train_set, valid_set, test_set = torch.utils.data.random_split(football_dataset, lengths=train_valid_test_split_value)
     # defining the dataloader
@@ -153,18 +176,49 @@ if __name__ == "__main__":
     
     # start training 
     best_loss = np.Inf
+    train_metrics= {    
+        'loss' : [],
+        'accuracy': [],
+    }
+    valid_metrics = {
+        'loss': [],
+        'accuracy': [],
+    }
     for i in range(epochs):
         loss, accuracy = train(i,
             segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
-        loss, accuracy = valid(i,
+        valid_loss, valid_accuracy = valid(i,
             segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
     
         print(f"Epoch : {i+1} - Loss: {loss}, Acc:{accuracy}%")
 
+        if (i+1)% 2 == 0:
+            print('test ipoch')
+            train_metrics['loss'].append(loss.item())
+            train_metrics['accuracy'].append(accuracy)
+            valid_metrics['loss'].append(valid_loss.item())
+            valid_metrics['accuracy'].append(valid_accuracy)
+
         if loss<best_loss:
-            
             os.makedirs(save_dirs, exist_ok=True)
             torch.save(segmentation_model.state_dict(),os.path.join(save_dirs, 'seg.pt'))
-            print("Model Updated")
+            print("[+] Model Updated")
             best_loss=loss
+            log_stream.write(f'Best model @ Epoch: {i} | Train loss: {loss} | Valid loss {valid_loss} | Train accuracy: {accuracy} | Valid accuracy: {valid_accuracy}\n')
+    print(train_metrics, valid_metrics)
+
+    plt.subplot(1,2,1)
+    plt.plot(train_metrics['loss'], label='train')
+    plt.plot(valid_metrics['loss'], label='valid')
+    plt.legend()
+    plt.title("Loss")
+
+    plt.subplot(1,2,2)
+    plt.plot(train_metrics['accuracy'], label='train')
+    plt.plot(valid_metrics['accuracy'], label='valid')
+    plt.legend()
+    plt.title("Accuracy")
+
+    plt.savefig(os.path.join(save_dirs, f'training_metrics.jpg'))
+    log_stream.close()
     ...

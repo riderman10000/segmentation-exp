@@ -7,20 +7,22 @@ from torch.utils.data import random_split, Dataset, DataLoader
 
 class FootballDataset(Dataset):
 
-    def __init__(self, path_to_data, transformations = None) -> None:
+    def __init__(self, path_to_data, transformations = None, n_times = 1) -> None:
         super().__init__()
-
+        self.n_times = n_times 
         self.image_paths = sorted(glob.glob(os.path.join(path_to_data, '*.jpg')))
         self.mask_paths = sorted(glob.glob(os.path.join(path_to_data, '*_fuse.png')))
         self.transformations = transformations
-        self.number_of_classes = 11 
+        self.number_of_classes = 11 # this is given from the dataset
 
         assert len(self.image_paths) == len(self.mask_paths), f"Error image lengthe -- {len(self.image_paths)} and mask length -- {len(self.mask_paths)} mismatch"
 
     def __len__(self):
-        return len(self.image_paths)
+        return len(self.image_paths) * self.n_times
     
     def __getitem__(self, index):
+
+        index = index % len(self.image_paths)
         image = cv2.imread(self.image_paths[index])[:,:,::-1] # importing rgb
         mask = cv2.imread(self.mask_paths[index])[:,:,::-1] # importing rgb
         if self.transformations:
