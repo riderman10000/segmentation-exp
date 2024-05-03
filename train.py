@@ -108,20 +108,20 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
 if __name__ == "__main__":
     image_size = 512 
     epochs = 100
-    batch_size = 4 
+    batch_size = 6
     learning_rate = 0.0003
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     pretrain = None # './runs/exp3/seg.pt' #
     
-    n_times = 2 # increase the datasize by n times
+    n_times = 1 # increase the datasize by n times
 
-    save_dirs = './runs/exp-aug/iteration-1/'
+    save_dirs = './runs/exp-no-augments/iteration-3/'
 
     transformations = A.Compose([
         A.Resize(image_size, image_size),
-        A.HorizontalFlip(p=0.5),
-        A.VerticalFlip(p=0.5),
+        # A.HorizontalFlip(p=0.5),
+        # A.VerticalFlip(p=0.5),
         # A.Blur(blur_limit=(1, 5), p=0.6),
         # A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
         # A.RandomBrightnessContrast(p=0.5),
@@ -136,14 +136,15 @@ if __name__ == "__main__":
     os.makedirs(save_dirs, exist_ok=True)
     log_stream = open(os.path.join(save_dirs, 'train_log.txt'), 'w+')
     log_stream.write(
-        f"Image Size: {image_size}\n" \
-        "Total Number of Epochs: {epochs}\n"\
-        "Batch Size: {batch_size}\n"\
-        "Learning rate: {learning_rate}\n"\
-        "data : {n_times} \n"\
-        "Device : {device}\n"\
-        "pretrain : {pretrain}\n"\
-        "Save directory : {save_dirs}\n"
+        f"\n\
+        Image Size: {image_size}\n \
+        Total Number of Epochs: {epochs}\n\
+        Batch Size: {batch_size}\n\
+        Learning rate: {learning_rate}\n\
+        n_times : {n_times} \n\
+        Device : {device}\n\
+        pretrain : {pretrain}\n\
+        Save directory : {save_dirs}\n"
     )
 
     log_stream.write('Used augmentation transformations\n')
