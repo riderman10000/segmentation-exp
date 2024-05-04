@@ -17,7 +17,7 @@ from football_dataset import FootballDataset
 
 image_size = 512 
 device = 'cuda' if torch.cuda.is_available() else 'cpu' 
-iteration_path = './runs/exp-augments-geometry/iteration-3/'
+iteration_path = './runs/exp-optimize/iteration-2'
 
 video_capture = cv2.VideoCapture('./video/game.mp4')
 if not (video_capture.isOpened()):
@@ -59,11 +59,11 @@ while video_capture.isOpened():
     ret, frame = video_capture.read()
     if ret:
         transformations = A.Compose([
-            A.Resize(image_size, image_size),
-            # A.Lambda(name='Letter Box', 
-            #     image=custom_transform,
-            #     mask=custom_transform,
-            #     p=1),
+            # A.Resize(image_size, image_size),
+            A.Lambda(name='Letter Box', 
+                image=custom_transform,
+                mask=custom_transform,
+                p=1),
             ToTensorV2(),
         ])
         original_frame = deepcopy(frame)

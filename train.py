@@ -128,9 +128,9 @@ if __name__ == "__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     pretrain = None # './runs/exp3/seg.pt' #
     
-    n_times = 1 # increase the datasize by n times
+    n_times = 2 # increase the datasize by n times
 
-    save_dirs = './runs/exp-augments-g+i/iteration-5'
+    save_dirs = './runs/exp-optimize/iteration-1'
     # albumentation_letterbox = 
     def custom_transform(data, **kwargs):
         kwargs['resized_width'] = image_size,
@@ -138,22 +138,22 @@ if __name__ == "__main__":
         return letterbox(image=data, **kwargs)
     
     transformations = A.Compose([
-        # A.Resize(image_size, image_size),
-        A.Lambda(name='Letter Box', 
-            image=custom_transform,
-            mask=custom_transform,
-            p=1),
+        A.Resize(image_size, image_size),
+        # A.Lambda(name='Letter Box', 
+        #     image=custom_transform,
+        #     mask=custom_transform,
+        #     p=1),
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5),
         A.Sharpen(alpha=(0.2, 0.5), lightness=(0.5, 1.0), p=0.6),
         A.RandomBrightnessContrast(p=0.5),
         
-        # A.Blur(blur_limit=(1, 5), p=0.6),
-        # A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
+        A.Blur(blur_limit=(1, 5), p=0.6),
+        A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
         # A.Rotate(limit=(-90, 90), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None, rotate_method='largest_box', crop_border=False, p=1.0),
         # A.SafeRotate(limit=(-45, 45), interpolation=0, border_mode=0, value=(0, 0, 0), p=0.6),
         # A.augmentations.transforms.Normalize
-        # A.ChannelShuffle(p=0.8),
+        A.ChannelShuffle(p=0.8),
         ToTensorV2(),
     ])
 
