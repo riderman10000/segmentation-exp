@@ -1,0 +1,24 @@
+
+        Image Size: 512
+         Total Number of Epochs: 10
+        Batch Size: 4
+        Learning rate: 0.0003
+        n_times : 1 
+        Device : cuda
+        pretrain : None
+        Save directory : ./runs/exp-augments-geometry/iteration-3
+Used augmentation transformations
+0. Lambda
+1. HorizontalFlip
+2. VerticalFlip
+3. ToTensorV2
+Best model @ Epoch: 0 | Train loss: 0.674886167049408 | Valid loss 0.6457772254943848 | Train accuracy: 76.32216326892375 | Valid accuracy: 80.38637340068819
+Best model @ Epoch: 1 | Train loss: 0.5492460131645203 | Valid loss 0.5077752470970154 | Train accuracy: 54.717319806416846 | Valid accuracy: 48.48070065180461
+Best model @ Epoch: 2 | Train loss: 0.48425552248954773 | Valid loss 0.44803714752197266 | Train accuracy: 36.81266307830811 | Valid accuracy: 26.478124856948853
+Best model @ Epoch: 3 | Train loss: 0.4377739131450653 | Valid loss 0.41016530990600586 | Train accuracy: 19.330697854359936 | Valid accuracy: 8.036130666732788
+Best model @ Epoch: 4 | Train loss: 0.3993757665157318 | Valid loss 0.3792209029197693 | Train accuracy: 2.6494721571604414 | Valid accuracy: -7.802020708719891
+Best model @ Epoch: 5 | Train loss: 0.36767587065696716 | Valid loss 0.34861528873443604 | Train accuracy: -14.54727013905843 | Valid accuracy: -26.12948258717854
+Best model @ Epoch: 6 | Train loss: 0.3442297875881195 | Valid loss 0.3317989706993103 | Train accuracy: -33.141549825668335 | Valid accuracy: -42.012481689453125
+Best model @ Epoch: 7 | Train loss: 0.33135363459587097 | Valid loss 0.3237254321575165 | Train accuracy: -50.04406452178955 | Valid accuracy: -55.18071651458742
+Best model @ Epoch: 8 | Train loss: 0.3238486051559448 | Valid loss 0.3175109028816223 | Train accuracy: -61.3185183207194 | Valid accuracy: -63.820600509643555
+Best model @ Epoch: 9 | Train loss: 0.31836336851119995 | Valid loss 0.31349650025367737 | Train accuracy: -69.63900566101074 | Valid accuracy: -71.35805765787758

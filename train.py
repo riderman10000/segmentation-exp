@@ -112,7 +112,7 @@ def letterbox(image, **kwargs):
     new_height = int(height * scale)
     new_width = int(width * scale)
     image = cv2.resize(image, (new_width, new_height))
-    new_img = np.full((resized_height, resized_width, 3), 128, dtype='uint8')
+    new_img = np.full((resized_height, resized_width, 3), 0,dtype='uint8')
     # fill new image with the resized image and centered it
     new_img[(resized_height - new_height) // 2:(resized_height - new_height) // 2 + new_height,
             (resized_width - new_width) // 2:(resized_width - new_width) // 2 + new_width,
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     
     n_times = 1 # increase the datasize by n times
 
-    save_dirs = './runs/exp-augments-geometry/iteration-1/'
+    save_dirs = './runs/exp-augments-g+i/iteration-5'
     # albumentation_letterbox = 
     def custom_transform(data, **kwargs):
         kwargs['resized_width'] = image_size,
@@ -145,10 +145,11 @@ if __name__ == "__main__":
             p=1),
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5),
+        A.Sharpen(alpha=(0.2, 0.5), lightness=(0.5, 1.0), p=0.6),
+        A.RandomBrightnessContrast(p=0.5),
+        
         # A.Blur(blur_limit=(1, 5), p=0.6),
         # A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
-        # A.RandomBrightnessContrast(p=0.5),
-        # A.Sharpen(alpha=(0.2, 0.5), lightness=(0.5, 1.0), p=0.6),
         # A.Rotate(limit=(-90, 90), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None, rotate_method='largest_box', crop_border=False, p=1.0),
         # A.SafeRotate(limit=(-45, 45), interpolation=0, border_mode=0, value=(0, 0, 0), p=0.6),
         # A.augmentations.transforms.Normalize
@@ -232,14 +233,14 @@ if __name__ == "__main__":
     print(train_metrics, valid_metrics)
 
     plt.subplot(1,2,1)
-    plt.plot(train_metrics['loss'], label='train')
-    plt.plot(valid_metrics['loss'], label='valid')
+    plt.plot([i for i in range(0, len(train_metrics['loss'])*2, 2)], train_metrics['loss'], label='train')
+    plt.plot([i for i in range(0, len(valid_metrics['loss'])*2, 2)], valid_metrics['loss'], label='valid')
     plt.legend()
     plt.title("Loss")
 
     plt.subplot(1,2,2)
-    plt.plot(train_metrics['accuracy'], label='train')
-    plt.plot(valid_metrics['accuracy'], label='valid')
+    plt.plot([i for i in range(0, len(train_metrics['accuracy'])*2, 2)], train_metrics['accuracy'], label='train')
+    plt.plot([i for i in range(0, len(valid_metrics['accuracy'])*2, 2)], valid_metrics['accuracy'], label='valid')
     plt.legend()
     plt.title("Accuracy")
 

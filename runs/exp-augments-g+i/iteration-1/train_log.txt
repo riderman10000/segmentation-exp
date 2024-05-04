@@ -1,0 +1,82 @@
+
+        Image Size: 512
+         Total Number of Epochs: 100
+        Batch Size: 4
+        Learning rate: 0.0003
+        n_times : 1 
+        Device : cuda
+        pretrain : None
+        Save directory : ./runs/exp-augments-g+i/iteration-1
+Used augmentation transformations
+0. Resize
+1. HorizontalFlip
+2. VerticalFlip
+3. Sharpen
+4. RandomBrightnessContrast
+5. ToTensorV2
+Best model @ Epoch: 0 | Train loss: 0.7176891565322876 | Valid loss 0.6379821300506592 | Train accuracy: 64.0464057524999 | Valid accuracy: 60.85890253384906
+Best model @ Epoch: 1 | Train loss: 0.6189839243888855 | Valid loss 0.5869899988174438 | Train accuracy: 60.96207996209462 | Valid accuracy: 71.73847059408823
+Best model @ Epoch: 2 | Train loss: 0.5803613066673279 | Valid loss 0.5615789890289307 | Train accuracy: 60.48069576422375 | Valid accuracy: 60.42365650335945
+Best model @ Epoch: 3 | Train loss: 0.5636522769927979 | Valid loss 0.5518182516098022 | Train accuracy: 59.48166628678639 | Valid accuracy: 57.51948853333791
+Best model @ Epoch: 4 | Train loss: 0.5542234778404236 | Valid loss 0.5463694930076599 | Train accuracy: 58.85056972503662 | Valid accuracy: 58.66330107053121
+Best model @ Epoch: 5 | Train loss: 0.5503621101379395 | Valid loss 0.5407170057296753 | Train accuracy: 59.54990863800049 | Valid accuracy: 61.63806597391763
+Best model @ Epoch: 6 | Train loss: 0.5457923412322998 | Valid loss 0.5383541584014893 | Train accuracy: 60.52416880925496 | Valid accuracy: 60.463789006074265
+Best model @ Epoch: 7 | Train loss: 0.5416083931922913 | Valid loss 0.5353589057922363 | Train accuracy: 61.38232032457987 | Valid accuracy: 62.32274164756139
+Best model @ Epoch: 8 | Train loss: 0.5388247966766357 | Valid loss 0.5330612063407898 | Train accuracy: 62.35000669956209 | Valid accuracy: 63.36196909348168
+Best model @ Epoch: 9 | Train loss: 0.5361628532409668 | Valid loss 0.5315573215484619 | Train accuracy: 62.873715957005835 | Valid accuracy: 62.71304736534754
+Best model @ Epoch: 10 | Train loss: 0.534623920917511 | Valid loss 0.530584454536438 | Train accuracy: 63.688906828562416 | Valid accuracy: 64.38270300626753
+Best model @ Epoch: 11 | Train loss: 0.5325543284416199 | Valid loss 0.5296534895896912 | Train accuracy: 64.35094912846884 | Valid accuracy: 66.4677307009697
+Best model @ Epoch: 12 | Train loss: 0.5316449403762817 | Valid loss 0.5281733870506287 | Train accuracy: 65.4092784722646 | Valid accuracy: 66.94509178400038
+Best model @ Epoch: 13 | Train loss: 0.5301032662391663 | Valid loss 0.527112603187561 | Train accuracy: 65.99227527777353 | Valid accuracy: 66.27074877421062
+Best model @ Epoch: 14 | Train loss: 0.5289754271507263 | Valid loss 0.5265524983406067 | Train accuracy: 66.73189530769983 | Valid accuracy: 65.15530685583751
+Best model @ Epoch: 15 | Train loss: 0.5279442667961121 | Valid loss 0.5259148478507996 | Train accuracy: 67.28633791208267 | Valid accuracy: 69.04130230347315
+Best model @ Epoch: 16 | Train loss: 0.527468204498291 | Valid loss 0.5254306197166443 | Train accuracy: 67.39187031984329 | Valid accuracy: 67.0823805530866
+Best model @ Epoch: 17 | Train loss: 0.5264735221862793 | Valid loss 0.5236690640449524 | Train accuracy: 68.02753408749899 | Valid accuracy: 67.47979472080867
+Best model @ Epoch: 18 | Train loss: 0.5258473753929138 | Valid loss 0.5226900577545166 | Train accuracy: 68.37940057118733 | Valid accuracy: 70.78279728690784
+Best model @ Epoch: 19 | Train loss: 0.5242006778717041 | Valid loss 0.5214840173721313 | Train accuracy: 68.5974288980166 | Valid accuracy: 69.26633755366008
+Best model @ Epoch: 20 | Train loss: 0.5236964225769043 | Valid loss 0.5210424065589905 | Train accuracy: 69.03824210166933 | Valid accuracy: 69.89290644725165
+Best model @ Epoch: 21 | Train loss: 0.5228216052055359 | Valid loss 0.5208535194396973 | Train accuracy: 69.1912997762362 | Valid accuracy: 70.86232259869576
+Best model @ Epoch: 22 | Train loss: 0.5221874117851257 | Valid loss 0.5212346911430359 | Train accuracy: 69.59439903497695 | Valid accuracy: 72.68563464283945
+Best model @ Epoch: 23 | Train loss: 0.5219071507453918 | Valid loss 0.519940972328186 | Train accuracy: 69.93512759606044 | Valid accuracy: 73.14198245604834
+Best model @ Epoch: 24 | Train loss: 0.5209654569625854 | Valid loss 0.5196825265884399 | Train accuracy: 70.1588640610377 | Valid accuracy: 71.25753000378607
+Best model @ Epoch: 25 | Train loss: 0.5203904509544373 | Valid loss 0.5196681618690491 | Train accuracy: 70.38451850414275 | Valid accuracy: 71.30074719587961
+Best model @ Epoch: 26 | Train loss: 0.5202710032463074 | Valid loss 0.5186018943786621 | Train accuracy: 70.71777035792668 | Valid accuracy: 71.32225349545479
+Best model @ Epoch: 27 | Train loss: 0.5198115110397339 | Valid loss 0.5184732675552368 | Train accuracy: 70.93821197748184 | Valid accuracy: 72.91520928343138
+Best model @ Epoch: 29 | Train loss: 0.5191290974617004 | Valid loss 0.5177333950996399 | Train accuracy: 71.66640172402064 | Valid accuracy: 72.47257684667905
+Best model @ Epoch: 30 | Train loss: 0.5189269781112671 | Valid loss 0.5183776617050171 | Train accuracy: 71.91392650206883 | Valid accuracy: 74.23347706596057
+Best model @ Epoch: 32 | Train loss: 0.5184155702590942 | Valid loss 0.5170889496803284 | Train accuracy: 72.45833784341811 | Valid accuracy: 72.53770262002944
+Best model @ Epoch: 33 | Train loss: 0.5182411670684814 | Valid loss 0.5171292424201965 | Train accuracy: 72.80382374922434 | Valid accuracy: 74.34420431653659
+Best model @ Epoch: 34 | Train loss: 0.5179575681686401 | Valid loss 0.5169681906700134 | Train accuracy: 73.1290124853452 | Valid accuracy: 74.6730742851893
+Best model @ Epoch: 35 | Train loss: 0.5177234411239624 | Valid loss 0.5165309906005859 | Train accuracy: 73.22102179129918 | Valid accuracy: 74.33554922540984
+Best model @ Epoch: 37 | Train loss: 0.5174874663352966 | Valid loss 0.5167257785797119 | Train accuracy: 73.75540365775426 | Valid accuracy: 76.12207800149918
+Best model @ Epoch: 38 | Train loss: 0.5172542333602905 | Valid loss 0.5157460570335388 | Train accuracy: 74.03206259012222 | Valid accuracy: 75.51856927573681
+Best model @ Epoch: 39 | Train loss: 0.5167715549468994 | Valid loss 0.5158123970031738 | Train accuracy: 74.13349171479544 | Valid accuracy: 74.74634990096092
+Best model @ Epoch: 40 | Train loss: 0.516465425491333 | Valid loss 0.5160600543022156 | Train accuracy: 74.40408060948053 | Valid accuracy: 75.37356108427048
+Best model @ Epoch: 45 | Train loss: 0.5163699388504028 | Valid loss 0.5149961709976196 | Train accuracy: 75.25600264469783 | Valid accuracy: 75.56897804141045
+Best model @ Epoch: 46 | Train loss: 0.5157265663146973 | Valid loss 0.5150012373924255 | Train accuracy: 75.31278610229494 | Valid accuracy: 76.35310612618925
+Best model @ Epoch: 47 | Train loss: 0.5154988765716553 | Valid loss 0.5145173072814941 | Train accuracy: 75.43119559685391 | Valid accuracy: 74.97441100577512
+Best model @ Epoch: 48 | Train loss: 0.5153547525405884 | Valid loss 0.5148571133613586 | Train accuracy: 75.59604773918787 | Valid accuracy: 75.51718071103096
+Best model @ Epoch: 49 | Train loss: 0.5153157711029053 | Valid loss 0.5147413611412048 | Train accuracy: 75.84496945142746 | Valid accuracy: 76.8544465303421
+Best model @ Epoch: 50 | Train loss: 0.5152676105499268 | Valid loss 0.5147169828414917 | Train accuracy: 75.92054396867752 | Valid accuracy: 76.56504484514394
+Best model @ Epoch: 51 | Train loss: 0.5150245428085327 | Valid loss 0.5154833197593689 | Train accuracy: 76.11975163221359 | Valid accuracy: 80.08951418101789
+Best model @ Epoch: 60 | Train loss: 0.5144055485725403 | Valid loss 0.5136318802833557 | Train accuracy: 77.86736955245335 | Valid accuracy: 78.69071096802752
+Best model @ Epoch: 61 | Train loss: 0.5139786601066589 | Valid loss 0.5132323503494263 | Train accuracy: 77.74933397769928 | Valid accuracy: 80.14218465735514
+Best model @ Epoch: 62 | Train loss: 0.5138471126556396 | Valid loss 0.5133964419364929 | Train accuracy: 78.0281130472819 | Valid accuracy: 80.06583310663699
+Best model @ Epoch: 63 | Train loss: 0.5138148069381714 | Valid loss 0.5130028128623962 | Train accuracy: 78.13489551345506 | Valid accuracy: 79.74462151527405
+Best model @ Epoch: 64 | Train loss: 0.5135924816131592 | Valid loss 0.5130339860916138 | Train accuracy: 78.0057088037332 | Valid accuracy: 80.98399127523105
+Best model @ Epoch: 65 | Train loss: 0.513536274433136 | Valid loss 0.5127818584442139 | Train accuracy: 78.23575019836424 | Valid accuracy: 78.73387426137926
+Best model @ Epoch: 66 | Train loss: 0.5131956934928894 | Valid loss 0.5131884217262268 | Train accuracy: 78.46160218119623 | Valid accuracy: 78.83837468922138
+Best model @ Epoch: 67 | Train loss: 0.5131728053092957 | Valid loss 0.512760579586029 | Train accuracy: 78.59127749999365 | Valid accuracy: 79.49959752460322
+Best model @ Epoch: 69 | Train loss: 0.5127357244491577 | Valid loss 0.5127715468406677 | Train accuracy: 79.02674078941347 | Valid accuracy: 80.52989076822998
+Best model @ Epoch: 72 | Train loss: 0.5125917792320251 | Valid loss 0.5125169157981873 | Train accuracy: 79.236209243536 | Valid accuracy: 79.2959993580977
+Best model @ Epoch: 73 | Train loss: 0.5123803019523621 | Valid loss 0.5121354460716248 | Train accuracy: 79.11265010635057 | Valid accuracy: 79.7965910968681
+Best model @ Epoch: 74 | Train loss: 0.5121714472770691 | Valid loss 0.5120275020599365 | Train accuracy: 79.43767949938774 | Valid accuracy: 81.00457559650143
+Best model @ Epoch: 75 | Train loss: 0.5121046900749207 | Valid loss 0.5120149850845337 | Train accuracy: 79.59742451707523 | Valid accuracy: 80.34755904227492
+Best model @ Epoch: 81 | Train loss: 0.5120366215705872 | Valid loss 0.5120337605476379 | Train accuracy: 80.18034915129344 | Valid accuracy: 81.44764997065069
+Best model @ Epoch: 90 | Train loss: 0.5119919180870056 | Valid loss 0.5116775035858154 | Train accuracy: 80.57123899459839 | Valid accuracy: 81.34968059758344
+Best model @ Epoch: 91 | Train loss: 0.5116894841194153 | Valid loss 0.5114322900772095 | Train accuracy: 80.68162386616072 | Valid accuracy: 80.64508964618047
+Best model @ Epoch: 92 | Train loss: 0.5112054944038391 | Valid loss 0.5111124515533447 | Train accuracy: 80.51555852095285 | Valid accuracy: 81.62146348506212
+Best model @ Epoch: 93 | Train loss: 0.5111778378486633 | Valid loss 0.5111607909202576 | Train accuracy: 80.68286145726839 | Valid accuracy: 82.5542546560367
+Best model @ Epoch: 95 | Train loss: 0.5109554529190063 | Valid loss 0.511633038520813 | Train accuracy: 80.85684215029082 | Valid accuracy: 82.43870054682097
+Best model @ Epoch: 96 | Train loss: 0.5108036398887634 | Valid loss 0.5111305117607117 | Train accuracy: 80.9327999750773 | Valid accuracy: 81.0008309284846
+Best model @ Epoch: 99 | Train loss: 0.51052325963974 | Valid loss 0.5105065107345581 | Train accuracy: 81.29188944896063 | Valid accuracy: 82.38885575284561
