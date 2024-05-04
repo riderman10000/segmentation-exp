@@ -5,7 +5,6 @@ from torch.nn import functional as F
 
 class Metrics:
     def __init__(self, predicted, original_mask, loss, eps = 1e-10, no_of_class = 2):
-        
         self.pred, self.mask = torch.argmax(F.softmax(predicted, dim=1), dim=1), original_mask # batch, width, height
         self.loss = loss 
         self.eps = eps 
