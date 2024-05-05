@@ -17,10 +17,7 @@ class SegmentationModel(nn.Module):
         pred = self.model(image) 
         if mask != None:  
             # print('argmax', torch.argmax(mask, dim=1))
-            # print('mask', mask)
-
             # print('shape', torch.argmax(mask, dim=1).shape, mask.shape)
-            # loss =  nn.CrossEntropyLoss()(pred, torch.argmax(mask, dim=1)) 
-            loss = nn.BCEWithLogitsLoss()(pred, mask)
+            loss =  nn.CrossEntropyLoss()(pred, torch.argmax(mask, dim=1)) 
             return pred, loss 
         return pred 

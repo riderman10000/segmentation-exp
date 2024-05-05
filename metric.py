@@ -4,22 +4,27 @@ import torch
 from torch.nn import functional as F 
 
 class Metrics:
-    def __init__(self, predicted, original_mask, loss, eps = 1e-10, no_of_class = 2):
+    def __init__(self, predicted, original_mask, loss_func= None, eps = 1e-10, no_of_class = 2):
         self.pred, self.mask = torch.argmax(F.softmax(predicted, dim=1), dim=1), original_mask # batch, width, height
-        self.loss = loss 
+        self.loss_func = loss_func 
         self.eps = eps 
         self.no_of_class = no_of_class 
-        self.pred_ = predicted 
+        # self.pred_ = predicted 
         ...
     
+    def __call__(self, predicted, original_mask) -> np.Any:
+        
+
+        return self
+
     def to_contiguous(self, inp):
         return inp.contiguous().view(-1)
     
-    def PA(self):
+    def pixel_accuracy(self): # = (Number of correctly classified pixels)/(Total number of pixels)
         with torch.no_grad():
-            match  = torch.eq(self.pred, self.mask).int()
-
-        return float(match.sum()) / float(match.numel())
+            match  = torch.eq(self.pred, self.mask).int() # eq - compare the corresponding elements of tensors, return as T and F, which is converted to 1 and 0 by .int() 
+        # formula for the pixel_accuracy
+        return float(match.sum()) / float(match.numel()) # .numel()--total number of elements in the tensor
     
     def mIoU(self):
         with torch.no_grad():
