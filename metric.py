@@ -33,6 +33,7 @@ class Metrics:
         with torch.no_grad():
             pred, mask = self.to_contiguous(self.pred), self.to_contiguous(self.mask)
             iou_per_class = [] 
+            iou_per_class_dict = {} 
             for c in range(self.no_of_class):
                 match_pred = pred == c 
                 match_mask = mask == c 
@@ -45,8 +46,9 @@ class Metrics:
 
                     iou = (intersect + self.eps) /(union + self.eps) 
                     iou_per_class.append(iou)
+                    iou_per_class_dict[c]=iou
                     print(f'class {c} IOU: {iou}')
-            return np.nanmean(iou_per_class)
+            return np.nanmean(iou_per_class), iou_per_class_dict
     
     def calculate_loss(self):
         return self.loss_func(self.pred_, self.mask.long()) # torch.argmax(self.mask, dim=1))
