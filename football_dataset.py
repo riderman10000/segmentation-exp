@@ -6,14 +6,13 @@ import torch
 from torch.utils.data import random_split, Dataset, DataLoader
 
 class FootballDataset(Dataset):
-
-    def __init__(self, path_to_data, transformations = None, n_times = 1) -> None:
+    def __init__(self, images_path, masks_path, transformations = None, n_times = 1) -> None:
         super().__init__()
-        self.n_times = n_times 
-        self.image_paths = sorted(glob.glob(os.path.join(path_to_data, '*.jpg')))
-        self.mask_paths = sorted(glob.glob(os.path.join(path_to_data, '*_fuse.png')))
+        self.n_times = n_times # increase the dataset by n times 
+        self.image_paths = sorted(glob.glob(os.path.join(images_path, '*.jpg')))
+        self.mask_paths = sorted(glob.glob(os.path.join(masks_path, '*_fuse.png')))
         self.transformations = transformations
-        self.number_of_classes = 11 # this is given from the dataset
+        # self.number_of_classes = 11 # this is given from the dataset
 
         assert len(self.image_paths) == len(self.mask_paths), f"Error image lengthe -- {len(self.image_paths)} and mask length -- {len(self.mask_paths)} mismatch"
 
@@ -24,10 +23,11 @@ class FootballDataset(Dataset):
 
         index = index % len(self.image_paths)
         image = cv2.imread(self.image_paths[index])[:,:,::-1] # importing rgb
-        mask = cv2.imread(self.mask_paths[index])[:,:,::-1] # importing rgb
+        mask = cv2.imread(self.mask_paths[index], 0) # new data of mask, as it is in single channel with categorical value of pixel
         if self.transformations:
             image, mask = self.apply_transformations(image, mask)
-        return image/ 255.0, mask.permute(2, 0, 1) / 255.0
+        # return image/ 255.0, mask.permute(2, 0, 1) / 255.0
+        return image/255.0, mask.unsqueeze(0) # since the mask is in one dimension and need to train in B, C, W, H
 
     def apply_transformations(self, image, mask):
         transformed = self.transformations(image = image, mask = mask)
