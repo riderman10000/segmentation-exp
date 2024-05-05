@@ -10,14 +10,27 @@ from albumentations.pytorch import ToTensorV2
 import torch  
 import torch.utils
 import torch.utils.data
+from torch import nn 
 from torchvision import transforms 
 from torch.utils.data import DataLoader
 
 from model import SegmentationModel
 from football_dataset import FootballDataset
+from metric import Metrics 
 
-def train(epoch, model, batch_size, image_size, data_loader, optimizer,  device = 'cuda' if torch.cuda.is_available() else 'cpu', save_dirs = './runs/exp/'):
+def train(epoch, model: SegmentationModel, batch_size, image_size, data_loader, optimizer,  
+          device = 'cuda' if torch.cuda.is_available() else 'cpu', 
+          metric: Metrics= None, save_dirs = './runs/exp/'):
+    '''
+    Function to train the model
+    '''
     model.train()
+
+    train_metrics = {
+        'loss': 0.0,
+        'miou': 0.0,
+        'pxl_acc': 0.0,
+    }
 
     train_loss = 0.0
     train_accuracy = 0.0 
@@ -32,15 +45,23 @@ def train(epoch, model, batch_size, image_size, data_loader, optimizer,  device 
 
         optimizer.zero_grad()
 
-        pred, loss = model(images, masks)
-        
+        # pred, loss = model(images, masks)
+        pred = model(images)
+        metric = metric(pred, masks)
+        loss = metric.calculate_loss()
+        mIOU = metric.mIoU()
+        pixel_accuracy = metric.pixel_accuracy()
+
+
         loss.backward()
         optimizer.step()
 
-        train_loss += loss 
-
-        accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
-        train_accuracy += (100 - accuracy)
+        train_metrics['loss'] += loss 
+        train_metrics['miou'] += mIOU
+        train_metrics['pxl_acc'] += pixel_accuracy
+        
+        # accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
+        # train_accuracy += (100 - accuracy)
 
     if (epoch + 1) %10 ==0 :
         path_to_fig = os.path.join(save_dirs, 'train_pred')
@@ -63,9 +84,16 @@ def train(epoch, model, batch_size, image_size, data_loader, optimizer,  device 
 
         plt.savefig(os.path.join(path_to_fig, f'image_{epoch+1}.jpg'))
         # plt.show()
-    return train_loss / len(data_loader), train_accuracy/len(data_loader)
 
-def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, optimizer,  device = 'cuda' if torch.cuda.is_available() else 'cpu', save_dirs = './runs/exp/'):
+    print(f"Train loss : {train_metrics['loss']/ len(data_loader)}\nmIOU: {train_metrics['miou']/ len(data_loader)}\n pixel_accuracy {train_metrics['pxl_acc']/len(data_loader)}")
+    return  train_metrics # train_loss / len(data_loader), train_accuracy/len(data_loader)
+
+def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, optimizer,  
+          device = 'cuda' if torch.cuda.is_available() else 'cpu', 
+          metric: Metrics= None, save_dirs = './runs/exp/'):
+    '''
+    Function for validation
+    '''
     model.eval()
     with torch.inference_mode():
         infer_loss = 0.0
@@ -120,17 +148,31 @@ def letterbox(image, **kwargs):
     return new_img 
 
 if __name__ == "__main__":
+    color_class_mapping = {
+        (137, 126, 126) : 0, # ground
+        (27,  71, 151) : 1, # advertisement
+        (111,  48, 253): 2, # audience
+        (255,   0, 29) : 3, # football post
+        (255, 160, 1) : 4, # team A # orange | goal keeper in green of MU
+        (255, 159, 0) : 5, #  goal keeper in green of MU keeper
+        (254, 233, 3) : 6, # team B # yellow | goal keeper in yellow of RMA
+        (255, 235, 0) : 7, #  goal keeper in yellow of RMA
+        (238, 171, 171) : 8, # refree pink
+        (201,  19, 223) : 9, # football
+    }
+    
     image_size = 512 
     epochs = 100
     batch_size = 4
     learning_rate = 0.0003
+    no_of_classes = len(color_class_mapping)
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     pretrain = None # './runs/exp3/seg.pt' #
     
     n_times = 2 # increase the datasize by n times
 
-    save_dirs = './runs/exp-optimize/iteration-1'
+    save_dirs = './runs/exp-c-optim/iteration-1'
     # albumentation_letterbox = 
     def custom_transform(data, **kwargs):
         kwargs['resized_width'] = image_size,
@@ -152,7 +194,6 @@ if __name__ == "__main__":
         A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
         # A.Rotate(limit=(-90, 90), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None, rotate_method='largest_box', crop_border=False, p=1.0),
         # A.SafeRotate(limit=(-45, 45), interpolation=0, border_mode=0, value=(0, 0, 0), p=0.6),
-        # A.augmentations.transforms.Normalize
         A.ChannelShuffle(p=0.8),
         ToTensorV2(),
     ])
@@ -176,9 +217,13 @@ if __name__ == "__main__":
         log_stream.write(f"{aug_idx}. {augmentation['__class_fullname__']}\n")
 
     # loading the dataset
-    football_dataset = FootballDataset('./images', transformations=transformations, n_times=n_times)
-    train_valid_test_split_value = list(map(lambda x : int(x * len(football_dataset)), [0.8, 0.15, .05]))
+    football_dataset = FootballDataset(
+        images_path='./images', masks_path='./masks', 
+        transformations=transformations, n_times=n_times)
+    
+    train_valid_test_split_value = list(map(lambda x : int(x * len(football_dataset)), [0.85, 0.14, .01]))
     train_set, valid_set, test_set = torch.utils.data.random_split(football_dataset, lengths=train_valid_test_split_value)
+    
     # defining the dataloader
     train_dataloader, valid_dataloader, test_dataloader = list(map(lambda x : DataLoader(x, batch_size=batch_size), [train_set, valid_set, test_set] ))
     
@@ -190,15 +235,21 @@ if __name__ == "__main__":
     image_size = d_width # as d_width = d_height
 
     # model 
-    segmentation_model = SegmentationModel()
+    segmentation_model = SegmentationModel(
+        encoder='timm-efficientnet-b0', weights='imagenet',
+        in_channels=3, classes=no_of_classes)
+    
     if pretrain != None:
         segmentation_model.load_state_dict(torch.load(pretrain))
-
     segmentation_model.to(device)
 
     # optimizer
     optimizer = torch.optim.Adam(segmentation_model.parameters(), lr=learning_rate)
-    
+    # loss 
+    loss_func =  nn.CrossEntropyLoss() #(pred, torch.argmax(mask, dim=1))
+    # metrics 
+    metrics = Metrics(loss_func=loss_func, no_of_class=len(color_class_mapping))
+
     # start training 
     best_loss = np.Inf
     train_metrics= {    
@@ -209,13 +260,16 @@ if __name__ == "__main__":
         'loss': [],
         'accuracy': [],
     }
+
     for i in range(epochs):
-        loss, accuracy = train(i,
-            segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
-        valid_loss, valid_accuracy = valid(i,
-            segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
+        train_metrics = train(i,
+            segmentation_model, batch_size, image_size, train_dataloader,optimizer, 
+            device, metric=metrics, save_dirs=save_dirs)
+        # valid_loss, valid_accuracy = valid(i,
+        #     segmentation_model, batch_size, image_size, train_dataloader,optimizer, 
+        #     device, metric= metrics, save_dirs=save_dirs)
     
-        print(f"Epoch : {i+1} - Loss: {loss}, Acc:{accuracy}%")
+        print(f"Epoch : {i+1} - Loss: {train_metrics['loss']}, mIOU:{train_metrics['miou']}, pixel accuracy {train_metrics['accuracy']}")
 
         if (i+1)% 2 == 0:
             print('test ipoch')
