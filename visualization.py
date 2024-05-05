@@ -18,12 +18,12 @@ def tensor_2_numpy(data, mask = None):
     # rgb = True if len(data) == 3 else False
     # return (inverse_transform(data) * 255).detach().cpu().permute(1, 2, 0).numpy().astype(np.uint8) if rgb else (data*255).detach().cpu().numpy().astype(np.uint8)
     rgb = True if not mask else False
-    img = ((data) * 255).detach().cpu().permute(1, 2, 0).numpy().astype(np.uint8) if rgb else (data*255).detach().cpu().numpy().astype(np.uint8)
+    img = ((data) * 255).detach().cpu().permute(1, 2, 0).numpy().astype(np.uint8) if rgb else (data * 20).detach().cpu().permute(1, 2, 0).numpy().astype(np.uint8)
     
     
     return img 
 
-def visualize(dataset, no_of_images):
+def visualize(dataset, no_of_images, mask_dim = 3):
     plt.figure(figsize=(25, 20)) 
     rows = no_of_images // 4 
     columns = no_of_images//rows
@@ -39,6 +39,6 @@ def visualize(dataset, no_of_images):
         count += 1
         # mask
         plt.subplot(rows, columns, count)
-        plt.imshow(tensor_2_numpy(mask.squeeze(0).float()))
+        plt.imshow(tensor_2_numpy(mask), cmap='gray')
         count += 1 
     plt.show()
