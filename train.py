@@ -9,9 +9,10 @@ from albumentations.pytorch import ToTensorV2
 
 import torch  
 import torch.utils
-import torch.utils.data
 from torch import nn 
+import torch.utils.data
 from torchvision import transforms 
+from torch.nn import functional as F 
 from torch.utils.data import DataLoader
 
 from model import SegmentationModel
@@ -24,18 +25,26 @@ def train(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
     '''
     Function to train the model
     '''
-    model.train()
-
     train_metrics = {
         'loss': 0.0,
         'miou': 0.0,
         'pxl_acc': 0.0,
+        'iou_c': {
+            0: 0.0,
+            1: 0.0,
+            2: 0.0,
+            3: 0.0,
+            4: 0.0,
+            5: 0.0,
+            6: 0.0,
+            7: 0.0,
+            8: 0.0,
+            9: 0.0,
+        },
     }
 
-    train_loss = 0.0
-    train_accuracy = 0.0 
+    model.train()
 
-    TQDM_BAR_FORMAT = "{l_bar}{bar:10}| {n_fmt}/{total_fmt} {elapsed}"  # tqdm bar format
     print(len(data_loader))
 
     # for i, (images, masks) in tqdm(enumerate(data_loader), total= len(data_loader.dataset), bar_format=TQDM_BAR_FORMAT):
@@ -49,9 +58,8 @@ def train(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
         pred = model(images)
         metric = metric(pred, masks)
         loss = metric.calculate_loss()
-        mIOU = metric.mIoU()
+        mIOU, iou_per_class_dict = metric.mIoU()
         pixel_accuracy = metric.pixel_accuracy()
-
 
         loss.backward()
         optimizer.step()
@@ -59,33 +67,38 @@ def train(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
         train_metrics['loss'] += loss 
         train_metrics['miou'] += mIOU
         train_metrics['pxl_acc'] += pixel_accuracy
-        
-        # accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
-        # train_accuracy += (100 - accuracy)
+        for key, value in iou_per_class_dict.items():
+            train_metrics['iou_c'][key] += value
 
-    if (epoch + 1) %10 ==0 :
+    if (epoch) %10 ==0 :
         path_to_fig = os.path.join(save_dirs, 'train_pred')
         os.makedirs( path_to_fig, exist_ok=True)
 
         plt.subplot(1,3,1)
-        plt.imshow(images[1].permute(1,2,0).detach().cpu().numpy())
+        plt.imshow(images[0].permute(1,2,0).detach().cpu().numpy())
         plt.axis('off')
         plt.title("Image")
 
         plt.subplot(1,3,2)
-        plt.imshow(pred[1].permute(1,2,0).detach().cpu().numpy())
+        plt.imshow(torch.argmax(F.softmax(pred, dim=1), dim=1).unsqueeze(1)[0].permute(1,2,0).detach().cpu().numpy())
         plt.axis('off')
         plt.title("Prediction")
 
         plt.subplot(1,3,3)
-        plt.imshow(masks[1].permute(1,2,0).detach().cpu().numpy())
+        plt.imshow(masks[0].permute(1,2,0).detach().cpu().numpy())
         plt.axis('off')
         plt.title("Truth")
 
         plt.savefig(os.path.join(path_to_fig, f'image_{epoch+1}.jpg'))
         # plt.show()
 
-    print(f"Train loss : {train_metrics['loss']/ len(data_loader)}\nmIOU: {train_metrics['miou']/ len(data_loader)}\n pixel_accuracy {train_metrics['pxl_acc']/len(data_loader)}")
+    train_metrics['loss'] /= len(data_loader)
+    train_metrics['miou'] /= len(data_loader)
+    train_metrics['pxl_acc'] /= len(data_loader)
+    for key, value in train_metrics['iou_c'].items():
+            train_metrics['iou_c'][key] /= len(data_loader)
+
+    # print(f"Train loss : {train_metrics['loss']}\nmIOU: {train_metrics['miou']}\n pixel_accuracy {train_metrics['pxl_acc']}")
     return  train_metrics # train_loss / len(data_loader), train_accuracy/len(data_loader)
 
 def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, optimizer,  
@@ -94,6 +107,24 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
     '''
     Function for validation
     '''
+    valid_metrics = {
+        'loss': 0.0,
+        'miou': 0.0,
+        'pxl_acc': 0.0,
+        'iou_c': {
+            0: 0.0,
+            1: 0.0,
+            2: 0.0,
+            3: 0.0,
+            4: 0.0,
+            5: 0.0,
+            6: 0.0,
+            7: 0.0,
+            8: 0.0,
+            9: 0.0,
+        },
+    }
+
     model.eval()
     with torch.inference_mode():
         infer_loss = 0.0
@@ -103,35 +134,49 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
             images = images.to(device)
             masks = masks.to(device)
 
-            pred, loss = model(images, masks)
-            
-            infer_loss += loss 
+            pred = model(images, masks)
+            metric = metric(pred, masks) 
+            loss = metric.calculate_loss() 
+            mIOU, iou_per_class_dict = metric.mIoU()
+            pixel_accuracy = metric.pixel_accuracy() 
 
-            accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
-            infer_accuracy += (100 - accuracy)
+            valid_metrics['loss'] += loss 
+            valid_metrics['miou'] += mIOU
+            valid_metrics['pxl_acc'] += pixel_accuracy
+            for key, value in iou_per_class_dict.items():
+                valid_metrics['iou_c'][key] += value
+            
+            # infer_loss += loss 
+            # accuracy = ((torch.sum(masks-pred).item())/(batch_size* 3 *image_size*image_size))*100
+            # infer_accuracy += (100 - accuracy)
         
-        if (epoch+1) %10 ==0 :
-            path_to_fig = os.path.join(save_dirs, 'train_pred')
+        if (epoch + 1 ) %10 ==0 :
+            path_to_fig = os.path.join(save_dirs, 'valid_pred')
             os.makedirs( path_to_fig, exist_ok=True)
 
             plt.subplot(1,3,1)
-            plt.imshow(images[1].permute(1,2,0).detach().cpu().numpy())
+            plt.imshow(images[0].permute(1,2,0).detach().cpu().numpy())
             plt.axis('off')
             plt.title("Image")
 
             plt.subplot(1,3,2)
-            plt.imshow(pred[1].permute(1,2,0).detach().cpu().numpy())
+            plt.imshow(torch.argmax(F.softmax(pred, dim=1), dim=1).unsqueeze(1)[0].permute(1,2,0).detach().cpu().numpy())
             plt.axis('off')
             plt.title("Prediction")
 
             plt.subplot(1,3,3)
-            plt.imshow(masks[1].permute(1,2,0).detach().cpu().numpy())
+            plt.imshow(masks[0].permute(1,2,0).detach().cpu().numpy())
             plt.axis('off')
             plt.title("Truth")
 
             plt.savefig(os.path.join(path_to_fig, f'image_{epoch+1}.jpg'))
             # plt.show()
-        return infer_loss / len(data_loader), infer_accuracy/len(data_loader)
+        valid_metrics['loss'] /= len(data_loader)
+        valid_metrics['miou'] /= len(data_loader)
+        valid_metrics['pxl_acc'] /= len(data_loader)
+
+        print(f"Train loss : {valid_metrics['loss']}\nmIOU: {valid_metrics['miou']}\n pixel_accuracy {valid_metrics['pxl_acc']}")
+        return valid_metrics # infer_loss / len(data_loader), infer_accuracy/len(data_loader)
 
 def letterbox(image, **kwargs):
     resized_width, resized_height = kwargs['resized_width'][0], kwargs['resized_height'][0]
@@ -160,9 +205,21 @@ if __name__ == "__main__":
         (238, 171, 171) : 8, # refree pink
         (201,  19, 223) : 9, # football
     }
-    
+    class_object_mapping = {
+        0 :  "ground",
+        1 :  "advertisement",
+        2 :  "audience",
+        3 :  "football post",
+        4 :  "team A", # orange | goal keeper in green of MU
+        5 :  "goal keeper A", # green of MU keeper
+        6 :  "team B", # yellow | goal keeper in yellow of RMA
+        7 :  "goal keeper B", # in yellow of RMA
+        8 :  "refree", # pink
+        9 :  "football",
+    }
+
     image_size = 512 
-    epochs = 100
+    epochs = 50
     batch_size = 4
     learning_rate = 0.0003
     no_of_classes = len(color_class_mapping)
@@ -170,9 +227,9 @@ if __name__ == "__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     pretrain = None # './runs/exp3/seg.pt' #
     
-    n_times = 2 # increase the datasize by n times
+    n_times = 1 # increase the datasize by n times
 
-    save_dirs = './runs/exp-c-optim/iteration-1'
+    save_dirs = './runs/exp-c-optim/iteration-2'
     # albumentation_letterbox = 
     def custom_transform(data, **kwargs):
         kwargs['resized_width'] = image_size,
@@ -253,50 +310,82 @@ if __name__ == "__main__":
     # start training 
     best_loss = np.Inf
     train_metrics= {    
-        'loss' : [],
-        'accuracy': [],
+        'loss': [],
+        'miou': [],
+        'pxl_acc': [],
     }
     valid_metrics = {
         'loss': [],
-        'accuracy': [],
+        'miou': [],
+        'pxl_acc': [],
     }
 
     for i in range(epochs):
-        train_metrics = train(i,
+        train_metric = train(i,
             segmentation_model, batch_size, image_size, train_dataloader,optimizer, 
             device, metric=metrics, save_dirs=save_dirs)
-        # valid_loss, valid_accuracy = valid(i,
-        #     segmentation_model, batch_size, image_size, train_dataloader,optimizer, 
-        #     device, metric= metrics, save_dirs=save_dirs)
+        valid_metric = valid(i,
+            segmentation_model, batch_size, image_size, valid_dataloader,optimizer, 
+            device, metric= metrics, save_dirs=save_dirs)
     
-        print(f"Epoch : {i+1} - Loss: {train_metrics['loss']}, mIOU:{train_metrics['miou']}, pixel accuracy {train_metrics['accuracy']}")
+        print(f"Epoch : {i+1}")
+        print(f"Train - Loss: {train_metric['loss']}, mIOU:{train_metric['miou']}, pixel accuracy {train_metric['pxl_acc']}")
+        print(f"Valid - Loss: {valid_metric['loss']}, mIOU:{valid_metric['miou']}, pixel accuracy {valid_metric['pxl_acc']}")
 
         if (i+1)% 2 == 0:
             print('test ipoch')
-            train_metrics['loss'].append(loss.item())
-            train_metrics['accuracy'].append(accuracy)
-            valid_metrics['loss'].append(valid_loss.item())
-            valid_metrics['accuracy'].append(valid_accuracy)
+            train_metrics['loss'].append(train_metric['loss'].item())
+            train_metrics['miou'].append(train_metric['miou'])
+            train_metrics['pxl_acc'].append(train_metric['pxl_acc'])
 
-        if loss<best_loss:
+            valid_metrics['loss'].append(valid_metric['loss'].item())
+            valid_metrics['miou'].append(valid_metric['miou'])
+            valid_metrics['pxl_acc'].append(valid_metric['pxl_acc'])
+
+        if train_metric['loss'].item() < best_loss:
             os.makedirs(save_dirs, exist_ok=True)
             torch.save(segmentation_model.state_dict(),os.path.join(save_dirs, 'seg.pt'))
             print("[+] Model Updated")
-            best_loss=loss
-            log_stream.write(f'Best model @ Epoch: {i} | Train loss: {loss} | Valid loss {valid_loss} | Train accuracy: {accuracy} | Valid accuracy: {valid_accuracy}\n')
+            best_loss=train_metric['loss'].item()
+            
+            training_logs = f"\n\
+            Best model @ Epoch: {i}\n\
+            Metrics:\tTrain\tValid\n\
+            Loss\t{train_metric['loss'].item():.4f}\t{valid_metric['loss'].item():.4f}\n\
+            mIOU\t{train_metric['miou']:.4f}\t{valid_metric['miou']:.4f}\n\
+            pxl_acc\t{train_metric['pxl_acc']:.4f}\t{valid_metric['pxl_acc']:.4f}\n\
+            "
+            
+            class_iou_logs = f"\n"
+            for key, value in train_metric['iou_c'].items():
+                class_iou_logs += f"IOU of {class_object_mapping[key]} Class: {value}\n"
+            
+            
+            print(training_logs)
+            print(class_iou_logs)
+
+            log_stream.write(training_logs)
+            log_stream.write(class_iou_logs)
+    
     print(train_metrics, valid_metrics)
 
-    plt.subplot(1,2,1)
+    plt.subplot(1,3,1)
     plt.plot([i for i in range(0, len(train_metrics['loss'])*2, 2)], train_metrics['loss'], label='train')
     plt.plot([i for i in range(0, len(valid_metrics['loss'])*2, 2)], valid_metrics['loss'], label='valid')
     plt.legend()
     plt.title("Loss")
 
-    plt.subplot(1,2,2)
-    plt.plot([i for i in range(0, len(train_metrics['accuracy'])*2, 2)], train_metrics['accuracy'], label='train')
-    plt.plot([i for i in range(0, len(valid_metrics['accuracy'])*2, 2)], valid_metrics['accuracy'], label='valid')
+    plt.subplot(1,3,2)
+    plt.plot([i for i in range(0, len(train_metrics['miou'])*2, 2)], train_metrics['miou'], label='train')
+    plt.plot([i for i in range(0, len(valid_metrics['miou'])*2, 2)], valid_metrics['miou'], label='valid')
     plt.legend()
-    plt.title("Accuracy")
+    plt.title("mIOU")
+
+    plt.subplot(1,3,3)
+    plt.plot([i for i in range(0, len(train_metrics['pxl_acc'])*2, 2)], train_metrics['pxl_acc'], label='train')
+    plt.plot([i for i in range(0, len(valid_metrics['pxl_acc'])*2, 2)], valid_metrics['pxl_acc'], label='valid')
+    plt.legend()
+    plt.title("Pixel Accuracy")
 
     plt.savefig(os.path.join(save_dirs, f'training_metrics.jpg'))
     log_stream.close()

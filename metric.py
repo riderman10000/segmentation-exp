@@ -26,7 +26,7 @@ class Metrics:
             match  = torch.eq(self.pred, self.mask).int() # eq - compare the corresponding elements of tensors, return as T and F, which is converted to 1 and 0 by .int() 
 
         # formula for the pixel_accuracy
-        print(f'pixel accuracy {float(match.sum()) / float(match.numel())}')
+        # print(f'pixel accuracy {float(match.sum()) / float(match.numel())}')
         return float(match.sum()) / float(match.numel()) # .numel()--total number of elements in the tensor
     
     def mIoU(self):
@@ -47,7 +47,7 @@ class Metrics:
                     iou = (intersect + self.eps) /(union + self.eps) 
                     iou_per_class.append(iou)
                     iou_per_class_dict[c]=iou
-                    print(f'class {c} IOU: {iou}')
+                    # print(f'class {c} IOU: {iou}')
             return np.nanmean(iou_per_class), iou_per_class_dict
     
     def calculate_loss(self):
