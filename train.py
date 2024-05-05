@@ -213,7 +213,7 @@ if __name__ == "__main__":
         loss, accuracy = train(i,
             segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
         valid_loss, valid_accuracy = valid(i,
-            segmentation_model, batch_size, image_size, train_dataloader,optimizer, device, save_dirs=save_dirs)
+            segmentation_model, batch_size, image_size, valid_dataloader,optimizer, device, save_dirs=save_dirs)
     
         print(f"Epoch : {i+1} - Loss: {loss}, Acc:{accuracy}%")
 
