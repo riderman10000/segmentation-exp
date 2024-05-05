@@ -175,7 +175,7 @@ def valid(epoch, model: SegmentationModel, batch_size, image_size, data_loader, 
         valid_metrics['miou'] /= len(data_loader)
         valid_metrics['pxl_acc'] /= len(data_loader)
 
-        print(f"Train loss : {valid_metrics['loss']}\nmIOU: {valid_metrics['miou']}\n pixel_accuracy {valid_metrics['pxl_acc']}")
+        # print(f"Valid loss : {valid_metrics['loss']}\nmIOU: {valid_metrics['miou']}\n pixel_accuracy {valid_metrics['pxl_acc']}")
         return valid_metrics # infer_loss / len(data_loader), infer_accuracy/len(data_loader)
 
 def letterbox(image, **kwargs):
