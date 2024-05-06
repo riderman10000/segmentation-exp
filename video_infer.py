@@ -31,9 +31,9 @@ class_color_mapping = {
 
 image_size = 512 
 device = 'cuda' if torch.cuda.is_available() else 'cpu' 
-iteration_path = './runs/exp-c-optim/iteration-2'
+iteration_path = './runs/exp-c-optim/iteration-8'
 
-video_capture = cv2.VideoCapture('./video/game.mp4')
+video_capture = cv2.VideoCapture('./video/game1.mp4')
 if not (video_capture.isOpened()):
     print('Error Openeing video stream or file')
 # video_out = cv2.VideoWriter(
@@ -41,7 +41,7 @@ if not (video_capture.isOpened()):
 #     cv2.VideoWriter_fourcc(*'XVID'), 20.0, (640,480))
 
 video_out = cv2.VideoWriter(
-    os.path.join(iteration_path, 'output.avi'), 
+    os.path.join(iteration_path, 'output1.avi'), 
     cv2.VideoWriter_fourcc(*"MJPG"), 20,(640,480))
 
 segmentation_model = SegmentationModel()
@@ -78,6 +78,7 @@ while video_capture.isOpened():
             #     image=custom_transform,
             #     mask=custom_transform,
             #     p=1),
+            
             ToTensorV2(),
         ])
         original_frame = deepcopy(frame)

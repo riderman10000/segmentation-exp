@@ -1,0 +1,1022 @@
+
+        Image Size: 512
+         Total Number of Epochs: 100
+        Batch Size: 4
+        Learning rate: 0.0005
+        n_times : 2 
+        Device : cuda
+        pretrain : None
+        Save directory : ./runs/exp-c-optim/iteration-4
+Used augmentation transformations
+0. Resize
+1. HorizontalFlip
+2. VerticalFlip
+3. Sharpen
+4. RandomBrightnessContrast
+5. Blur
+6. CLAHE
+7. ChannelShuffle
+8. ToTensorV2
+
+            Best model @ Epoch: 0
+            Metrics:	Train	Valid
+            Loss	1.3518	0.9062
+            mIOU	0.1936	0.2650
+            pxl_acc	0.6318	0.7523
+            
+IOU of ground Class: 0.673039172732154
+IOU of advertisement Class: 0.4759795823421424
+IOU of audience Class: 0.47437567366520994
+IOU of football post Class: 0.059687256074575944
+IOU of team A Class: 0.07288348761742157
+IOU of goal keeper A Class: 0.003155872518227532
+IOU of team B Class: 0.04444516596601166
+IOU of goal keeper B Class: 0.0022038090956567895
+IOU of refree Class: 0.001896418679458966
+IOU of football Class: 0.0018996766834115148
+
+            Best model @ Epoch: 1
+            Metrics:	Train	Valid
+            Loss	0.7012	0.4893
+            mIOU	0.3359	0.3944
+            pxl_acc	0.8166	0.8739
+            
+IOU of ground Class: 0.8165843538737814
+IOU of advertisement Class: 0.7397227868152592
+IOU of audience Class: 0.7310796489720359
+IOU of football post Class: 0.10966690056588296
+IOU of team A Class: 0.417610881697576
+IOU of goal keeper A Class: 2.023291098041797e-14
+IOU of team B Class: 0.3275037760723559
+IOU of goal keeper B Class: 1.3491515767643904e-14
+IOU of refree Class: 1.9569246058314285e-14
+IOU of football Class: 1.349687926877788e-13
+
+            Best model @ Epoch: 2
+            Metrics:	Train	Valid
+            Loss	0.5173	0.3919
+            mIOU	0.4101	0.4478
+            pxl_acc	0.8667	0.8998
+            
+IOU of ground Class: 0.8680341402581577
+IOU of advertisement Class: 0.7990968908128872
+IOU of audience Class: 0.8061179916656703
+IOU of football post Class: 0.32814408685677293
+IOU of team A Class: 0.534113409841893
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.508572083328192
+IOU of goal keeper B Class: 1.3493522144441563e-14
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706415852307637e-13
+
+            Best model @ Epoch: 3
+            Metrics:	Train	Valid
+            Loss	0.4112	0.3474
+            mIOU	0.4483	0.4597
+            pxl_acc	0.8937	0.9104
+            
+IOU of ground Class: 0.8975903526942804
+IOU of advertisement Class: 0.8351752423473928
+IOU of audience Class: 0.8453759180361643
+IOU of football post Class: 0.43006339751647243
+IOU of team A Class: 0.6047020223329772
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.5887696892364056
+IOU of goal keeper B Class: 1.3493130391724817e-14
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 4
+            Metrics:	Train	Valid
+            Loss	0.3542	0.3030
+            mIOU	0.4701	0.4871
+            pxl_acc	0.9069	0.9191
+            
+IOU of ground Class: 0.9133771506970343
+IOU of advertisement Class: 0.8591633543548607
+IOU of audience Class: 0.863825991680136
+IOU of football post Class: 0.5044946128833866
+IOU of team A Class: 0.6378932282227798
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.6285966193324766
+IOU of goal keeper B Class: 1.6864259709616958e-06
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 5
+            Metrics:	Train	Valid
+            Loss	0.3074	0.2957
+            mIOU	0.4889	0.4880
+            pxl_acc	0.9200	0.9205
+            
+IOU of ground Class: 0.9329809708630067
+IOU of advertisement Class: 0.8684277513058563
+IOU of audience Class: 0.8874547087885958
+IOU of football post Class: 0.5616232512333869
+IOU of team A Class: 0.6675209935856055
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.667343579944814
+IOU of goal keeper B Class: 1.4296138945210035e-05
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 6
+            Metrics:	Train	Valid
+            Loss	0.2785	0.2614
+            mIOU	0.5006	0.4982
+            pxl_acc	0.9251	0.9268
+            
+IOU of ground Class: 0.9403645255127766
+IOU of advertisement Class: 0.8751311374723179
+IOU of audience Class: 0.8895162451915877
+IOU of football post Class: 0.6131540235378752
+IOU of team A Class: 0.6909692484727064
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.6850852957458365
+IOU of goal keeper B Class: 8.814775336415026e-05
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 7
+            Metrics:	Train	Valid
+            Loss	0.2461	0.2448
+            mIOU	0.5137	0.5154
+            pxl_acc	0.9333	0.9301
+            
+IOU of ground Class: 0.9495937597284972
+IOU of advertisement Class: 0.8916213006686424
+IOU of audience Class: 0.9136003951427145
+IOU of football post Class: 0.6544139234451276
+IOU of team A Class: 0.7033059342186643
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.6977424103315694
+IOU of goal keeper B Class: 0.0050592882918674585
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 8
+            Metrics:	Train	Valid
+            Loss	0.2234	0.2229
+            mIOU	0.5297	0.5367
+            pxl_acc	0.9384	0.9354
+            
+IOU of ground Class: 0.953343467151464
+IOU of advertisement Class: 0.9001335748919198
+IOU of audience Class: 0.9241928674840476
+IOU of football post Class: 0.6594664055126157
+IOU of team A Class: 0.7224944104709282
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.7152011073636025
+IOU of goal keeper B Class: 0.09146475347068454
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 9
+            Metrics:	Train	Valid
+            Loss	0.2082	0.2162
+            mIOU	0.5606	0.5549
+            pxl_acc	0.9440	0.9389
+            
+IOU of ground Class: 0.9565105234960695
+IOU of advertisement Class: 0.9031400881086886
+IOU of audience Class: 0.9251359213331711
+IOU of football post Class: 0.6844318829051554
+IOU of team A Class: 0.7496375764782339
+IOU of goal keeper A Class: 2.0240983014737276e-14
+IOU of team B Class: 0.7409527191694397
+IOU of goal keeper B Class: 0.2958949633008902
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 10
+            Metrics:	Train	Valid
+            Loss	0.1866	0.2020
+            mIOU	0.5757	0.5688
+            pxl_acc	0.9490	0.9408
+            
+IOU of ground Class: 0.9603201714851908
+IOU of advertisement Class: 0.9184016108586258
+IOU of audience Class: 0.9311852661965881
+IOU of football post Class: 0.7073034648678665
+IOU of team A Class: 0.7670895663331515
+IOU of goal keeper A Class: 1.0557886041403187e-05
+IOU of team B Class: 0.7623807470731345
+IOU of goal keeper B Class: 0.34669262958497044
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 11
+            Metrics:	Train	Valid
+            Loss	0.1783	0.1814
+            mIOU	0.5835	0.5841
+            pxl_acc	0.9502	0.9458
+            
+IOU of ground Class: 0.9587793116281897
+IOU of advertisement Class: 0.9134543669791293
+IOU of audience Class: 0.9332483435319073
+IOU of football post Class: 0.7168043867959045
+IOU of team A Class: 0.7846399946262337
+IOU of goal keeper A Class: 1.4327181504234121e-05
+IOU of team B Class: 0.7620053140938281
+IOU of goal keeper B Class: 0.3997072855464628
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 12
+            Metrics:	Train	Valid
+            Loss	0.1600	0.1699
+            mIOU	0.5951	0.5857
+            pxl_acc	0.9545	0.9472
+            
+IOU of ground Class: 0.9649561484046747
+IOU of advertisement Class: 0.9248362420133067
+IOU of audience Class: 0.9450523101847444
+IOU of football post Class: 0.7398209003478882
+IOU of team A Class: 0.7942113568103785
+IOU of goal keeper A Class: 0.00021386439289406992
+IOU of team B Class: 0.7815486778481168
+IOU of goal keeper B Class: 0.4229828668280362
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 13
+            Metrics:	Train	Valid
+            Loss	0.1522	0.4187
+            mIOU	0.5997	0.5199
+            pxl_acc	0.9551	0.9082
+            
+IOU of ground Class: 0.9622358895154598
+IOU of advertisement Class: 0.9207125296381002
+IOU of audience Class: 0.9363532283880811
+IOU of football post Class: 0.743001686741976
+IOU of team A Class: 0.8155367855906881
+IOU of goal keeper A Class: 0.0013191994244087643
+IOU of team B Class: 0.7900952541221944
+IOU of goal keeper B Class: 0.4506625062378685
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 16
+            Metrics:	Train	Valid
+            Loss	0.1417	0.1544
+            mIOU	0.6121	0.5952
+            pxl_acc	0.9574	0.9501
+            
+IOU of ground Class: 0.9657241627484039
+IOU of advertisement Class: 0.928640443554912
+IOU of audience Class: 0.9447802839658418
+IOU of football post Class: 0.7474539941146138
+IOU of team A Class: 0.8295703088927848
+IOU of goal keeper A Class: 0.04013840041988161
+IOU of team B Class: 0.8072645649712651
+IOU of goal keeper B Class: 0.46968767305803044
+IOU of refree Class: 1.957041226263382e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 17
+            Metrics:	Train	Valid
+            Loss	0.1257	0.1417
+            mIOU	0.6271	0.6077
+            pxl_acc	0.9612	0.9520
+            
+IOU of ground Class: 0.969063668755743
+IOU of advertisement Class: 0.9346580944538478
+IOU of audience Class: 0.9512341208662506
+IOU of football post Class: 0.7698259602357983
+IOU of team A Class: 0.8451769885998967
+IOU of goal keeper A Class: 0.10004568585944666
+IOU of team B Class: 0.8202195307396896
+IOU of goal keeper B Class: 0.4836326166545719
+IOU of refree Class: 1.9567425968038756e-14
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 18
+            Metrics:	Train	Valid
+            Loss	0.1181	0.1357
+            mIOU	0.6415	0.6343
+            pxl_acc	0.9629	0.9554
+            
+IOU of ground Class: 0.9692265249800173
+IOU of advertisement Class: 0.9368987797922342
+IOU of audience Class: 0.9544618550068318
+IOU of football post Class: 0.7757188673420157
+IOU of team A Class: 0.8521020180948239
+IOU of goal keeper A Class: 0.17701477143528407
+IOU of team B Class: 0.8299697995145845
+IOU of goal keeper B Class: 0.5117649136376351
+IOU of refree Class: 0.00323610232330444
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 19
+            Metrics:	Train	Valid
+            Loss	0.1118	0.1367
+            mIOU	0.6561	0.6446
+            pxl_acc	0.9648	0.9559
+            
+IOU of ground Class: 0.971202911918859
+IOU of advertisement Class: 0.9396140170710047
+IOU of audience Class: 0.9570171220669477
+IOU of football post Class: 0.7836205525010742
+IOU of team A Class: 0.8621231091463766
+IOU of goal keeper A Class: 0.23132233317618292
+IOU of team B Class: 0.8401686559229828
+IOU of goal keeper B Class: 0.5369354181272489
+IOU of refree Class: 0.027035955353264036
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 22
+            Metrics:	Train	Valid
+            Loss	0.1116	0.1205
+            mIOU	0.6971	0.7127
+            pxl_acc	0.9656	0.9617
+            
+IOU of ground Class: 0.9697848376020738
+IOU of advertisement Class: 0.9378211960659244
+IOU of audience Class: 0.9523882781072792
+IOU of football post Class: 0.7999261023584999
+IOU of team A Class: 0.8621671566024115
+IOU of goal keeper A Class: 0.3394669143802335
+IOU of team B Class: 0.8364096343796809
+IOU of goal keeper B Class: 0.5847530219375574
+IOU of refree Class: 0.2624536734006486
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 23
+            Metrics:	Train	Valid
+            Loss	0.1047	0.1139
+            mIOU	0.7113	0.7337
+            pxl_acc	0.9674	0.9648
+            
+IOU of ground Class: 0.9706285593487066
+IOU of advertisement Class: 0.9375969620796439
+IOU of audience Class: 0.9587587336477695
+IOU of football post Class: 0.7988538601755412
+IOU of team A Class: 0.865243659098322
+IOU of goal keeper A Class: 0.38214028725120963
+IOU of team B Class: 0.8421367114571283
+IOU of goal keeper B Class: 0.5894344706394558
+IOU of refree Class: 0.34029449320977084
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 24
+            Metrics:	Train	Valid
+            Loss	0.0961	0.1029
+            mIOU	0.7240	0.7555
+            pxl_acc	0.9695	0.9670
+            
+IOU of ground Class: 0.9742452732995567
+IOU of advertisement Class: 0.9428135245797701
+IOU of audience Class: 0.9595619449610111
+IOU of football post Class: 0.7945163695240168
+IOU of team A Class: 0.8736353094238918
+IOU of goal keeper A Class: 0.4273288279203193
+IOU of team B Class: 0.8497184654107606
+IOU of goal keeper B Class: 0.6387161944040497
+IOU of refree Class: 0.34367671573423536
+IOU of football Class: 1.3706921015938723e-13
+
+            Best model @ Epoch: 25
+            Metrics:	Train	Valid
+            Loss	0.0922	0.1059
+            mIOU	0.7334	0.7455
+            pxl_acc	0.9704	0.9660
+            
+IOU of ground Class: 0.9740693991168865
+IOU of advertisement Class: 0.9434970828407554
+IOU of audience Class: 0.9616804709328185
+IOU of football post Class: 0.8075791575826532
+IOU of team A Class: 0.8748426523101193
+IOU of goal keeper A Class: 0.444928375286706
+IOU of team B Class: 0.8559209617741612
+IOU of goal keeper B Class: 0.6475308866443034
+IOU of refree Class: 0.3846954496738196
+IOU of football Class: 1.3706242591475065e-13
+
+            Best model @ Epoch: 26
+            Metrics:	Train	Valid
+            Loss	0.0876	0.1010
+            mIOU	0.7387	0.7627
+            pxl_acc	0.9716	0.9674
+            
+IOU of ground Class: 0.9750907273575398
+IOU of advertisement Class: 0.9450574558859829
+IOU of audience Class: 0.9599090821055423
+IOU of football post Class: 0.8147343289024497
+IOU of team A Class: 0.8817610294144368
+IOU of goal keeper A Class: 0.4574718709159205
+IOU of team B Class: 0.8591748177642895
+IOU of goal keeper B Class: 0.6492005920414168
+IOU of refree Class: 0.403309747442816
+IOU of football Class: 1.732276658286592e-05
+
+            Best model @ Epoch: 27
+            Metrics:	Train	Valid
+            Loss	0.0846	0.0986
+            mIOU	0.7417	0.7635
+            pxl_acc	0.9723	0.9683
+            
+IOU of ground Class: 0.9759897764312663
+IOU of advertisement Class: 0.9473087372722024
+IOU of audience Class: 0.9637551928614196
+IOU of football post Class: 0.8154220981211349
+IOU of team A Class: 0.8848063462777371
+IOU of goal keeper A Class: 0.4489601178483212
+IOU of team B Class: 0.858670040682041
+IOU of goal keeper B Class: 0.6604615092600917
+IOU of refree Class: 0.418025850069058
+IOU of football Class: 1.3703534169067548e-13
+
+            Best model @ Epoch: 28
+            Metrics:	Train	Valid
+            Loss	0.0809	0.0929
+            mIOU	0.7523	0.7677
+            pxl_acc	0.9734	0.9696
+            
+IOU of ground Class: 0.9765706711512312
+IOU of advertisement Class: 0.9490265802363618
+IOU of audience Class: 0.9650982222663061
+IOU of football post Class: 0.8044550190685095
+IOU of team A Class: 0.8890608147740997
+IOU of goal keeper A Class: 0.4852555746111987
+IOU of team B Class: 0.8652869573670118
+IOU of goal keeper B Class: 0.6940044954258285
+IOU of refree Class: 0.4503048644875415
+IOU of football Class: 1.3701166382105037e-13
+
+            Best model @ Epoch: 29
+            Metrics:	Train	Valid
+            Loss	0.0792	0.0925
+            mIOU	0.7554	0.7689
+            pxl_acc	0.9737	0.9693
+            
+IOU of ground Class: 0.9762800740909584
+IOU of advertisement Class: 0.9482168452417187
+IOU of audience Class: 0.9661372386288963
+IOU of football post Class: 0.8308911024378873
+IOU of team A Class: 0.8916061692597131
+IOU of goal keeper A Class: 0.4920454826140661
+IOU of team B Class: 0.8664143899293251
+IOU of goal keeper B Class: 0.6782705986290568
+IOU of refree Class: 0.45511061571363465
+IOU of football Class: 0.0014802202151434987
+
+            Best model @ Epoch: 30
+            Metrics:	Train	Valid
+            Loss	0.0773	0.0932
+            mIOU	0.7607	0.7648
+            pxl_acc	0.9740	0.9684
+            
+IOU of ground Class: 0.9759988665225828
+IOU of advertisement Class: 0.9452657576845584
+IOU of audience Class: 0.963957138741833
+IOU of football post Class: 0.8244506073213763
+IOU of team A Class: 0.8931781413955842
+IOU of goal keeper A Class: 0.49999306371152924
+IOU of team B Class: 0.8712102497375829
+IOU of goal keeper B Class: 0.691669753082603
+IOU of refree Class: 0.4842938519724364
+IOU of football Class: 0.007905420969409532
+
+            Best model @ Epoch: 33
+            Metrics:	Train	Valid
+            Loss	0.0744	0.0879
+            mIOU	0.7740	0.7817
+            pxl_acc	0.9748	0.9698
+            
+IOU of ground Class: 0.9773047281884856
+IOU of advertisement Class: 0.9491605604083349
+IOU of audience Class: 0.967040848116838
+IOU of football post Class: 0.8277706011645929
+IOU of team A Class: 0.8954149110828419
+IOU of goal keeper A Class: 0.525686807950184
+IOU of team B Class: 0.8747774576169477
+IOU of goal keeper B Class: 0.7020073732586927
+IOU of refree Class: 0.4764053007563034
+IOU of football Class: 0.08320374601089871
+
+            Best model @ Epoch: 34
+            Metrics:	Train	Valid
+            Loss	0.0727	0.0876
+            mIOU	0.7881	0.8004
+            pxl_acc	0.9751	0.9705
+            
+IOU of ground Class: 0.977803507919483
+IOU of advertisement Class: 0.9506839524715255
+IOU of audience Class: 0.9663283055989507
+IOU of football post Class: 0.8353818417595587
+IOU of team A Class: 0.8946370687895203
+IOU of goal keeper A Class: 0.5343395095268175
+IOU of team B Class: 0.871671497535475
+IOU of goal keeper B Class: 0.7111559837752639
+IOU of refree Class: 0.47407708215904115
+IOU of football Class: 0.2001064796163193
+
+            Best model @ Epoch: 35
+            Metrics:	Train	Valid
+            Loss	0.0692	0.0881
+            mIOU	0.8092	0.7985
+            pxl_acc	0.9764	0.9705
+            
+IOU of ground Class: 0.9789988922633436
+IOU of advertisement Class: 0.9514513320762387
+IOU of audience Class: 0.9673362823912295
+IOU of football post Class: 0.8392015781127978
+IOU of team A Class: 0.9015433943221128
+IOU of goal keeper A Class: 0.5513616556983566
+IOU of team B Class: 0.877252073985317
+IOU of goal keeper B Class: 0.7094549110958013
+IOU of refree Class: 0.4837156897206456
+IOU of football Class: 0.35004543834193586
+
+            Best model @ Epoch: 36
+            Metrics:	Train	Valid
+            Loss	0.0666	0.0753
+            mIOU	0.8196	0.8236
+            pxl_acc	0.9770	0.9740
+            
+IOU of ground Class: 0.9789560936825392
+IOU of advertisement Class: 0.9525752742791844
+IOU of audience Class: 0.9672620367482404
+IOU of football post Class: 0.8358915617887402
+IOU of team A Class: 0.9013279274282024
+IOU of goal keeper A Class: 0.5593930643459487
+IOU of team B Class: 0.8805496879624365
+IOU of goal keeper B Class: 0.7188734722656218
+IOU of refree Class: 0.5133932598906095
+IOU of football Class: 0.3997741333457491
+
+            Best model @ Epoch: 37
+            Metrics:	Train	Valid
+            Loss	0.0649	0.0801
+            mIOU	0.8303	0.8197
+            pxl_acc	0.9776	0.9728
+            
+IOU of ground Class: 0.9790218966937618
+IOU of advertisement Class: 0.9534978773713696
+IOU of audience Class: 0.968941605066269
+IOU of football post Class: 0.8471403629352044
+IOU of team A Class: 0.9035706082162627
+IOU of goal keeper A Class: 0.5722006959862008
+IOU of team B Class: 0.8860807175633707
+IOU of goal keeper B Class: 0.724473115157859
+IOU of refree Class: 0.5131129813054748
+IOU of football Class: 0.45833570245811217
+
+            Best model @ Epoch: 38
+            Metrics:	Train	Valid
+            Loss	0.0638	0.0876
+            mIOU	0.8309	0.8306
+            pxl_acc	0.9778	0.9706
+            
+IOU of ground Class: 0.9795952708979109
+IOU of advertisement Class: 0.9528125315651852
+IOU of audience Class: 0.9673348967847651
+IOU of football post Class: 0.8464986418781012
+IOU of team A Class: 0.9072353743921172
+IOU of goal keeper A Class: 0.5838817178146688
+IOU of team B Class: 0.8858453608446349
+IOU of goal keeper B Class: 0.7249979653496947
+IOU of refree Class: 0.5040967105994103
+IOU of football Class: 0.4634107284178216
+
+            Best model @ Epoch: 39
+            Metrics:	Train	Valid
+            Loss	0.0632	0.0812
+            mIOU	0.8398	0.8331
+            pxl_acc	0.9779	0.9717
+            
+IOU of ground Class: 0.9798673446382221
+IOU of advertisement Class: 0.9535690627915177
+IOU of audience Class: 0.9685983112049198
+IOU of football post Class: 0.8294547756610098
+IOU of team A Class: 0.9051746530234605
+IOU of goal keeper A Class: 0.5925972541910529
+IOU of team B Class: 0.8851006408542585
+IOU of goal keeper B Class: 0.7410741894218664
+IOU of refree Class: 0.5147060291353409
+IOU of football Class: 0.5276401265782219
+
+            Best model @ Epoch: 40
+            Metrics:	Train	Valid
+            Loss	0.0609	0.0776
+            mIOU	0.8479	0.8404
+            pxl_acc	0.9785	0.9733
+            
+IOU of ground Class: 0.9794373294809954
+IOU of advertisement Class: 0.954289141103585
+IOU of audience Class: 0.9698150117193306
+IOU of football post Class: 0.8497254428068491
+IOU of team A Class: 0.9078610290471135
+IOU of goal keeper A Class: 0.597387958396162
+IOU of team B Class: 0.8897037312651803
+IOU of goal keeper B Class: 0.7354479571296552
+IOU of refree Class: 0.5276563405168283
+IOU of football Class: 0.5656494776571331
+
+            Best model @ Epoch: 41
+            Metrics:	Train	Valid
+            Loss	0.0594	0.0761
+            mIOU	0.8475	0.8403
+            pxl_acc	0.9790	0.9735
+            
+IOU of ground Class: 0.9798508143087238
+IOU of advertisement Class: 0.9566514710737255
+IOU of audience Class: 0.9715273041163134
+IOU of football post Class: 0.8486513529612317
+IOU of team A Class: 0.91011797696769
+IOU of goal keeper A Class: 0.600900038944164
+IOU of team B Class: 0.8921600419172706
+IOU of goal keeper B Class: 0.7389660638850541
+IOU of refree Class: 0.5176930005520223
+IOU of football Class: 0.5552885024785909
+
+            Best model @ Epoch: 43
+            Metrics:	Train	Valid
+            Loss	0.0588	0.0756
+            mIOU	0.8531	0.8462
+            pxl_acc	0.9793	0.9738
+            
+IOU of ground Class: 0.9804762608337878
+IOU of advertisement Class: 0.9569729077236168
+IOU of audience Class: 0.9711984658346158
+IOU of football post Class: 0.857596930683513
+IOU of team A Class: 0.9109893335897343
+IOU of goal keeper A Class: 0.5992679094795023
+IOU of team B Class: 0.8906423062931405
+IOU of goal keeper B Class: 0.7404495238484592
+IOU of refree Class: 0.5355184342787442
+IOU of football Class: 0.5813026211723117
+
+            Best model @ Epoch: 44
+            Metrics:	Train	Valid
+            Loss	0.0575	0.0718
+            mIOU	0.8555	0.8465
+            pxl_acc	0.9794	0.9742
+            
+IOU of ground Class: 0.9808575174978976
+IOU of advertisement Class: 0.9560518098595164
+IOU of audience Class: 0.9716457846315063
+IOU of football post Class: 0.8450535665567016
+IOU of team A Class: 0.9114243640957341
+IOU of goal keeper A Class: 0.6133110457578113
+IOU of team B Class: 0.8927610175051174
+IOU of goal keeper B Class: 0.749757527905638
+IOU of refree Class: 0.5205811154904147
+IOU of football Class: 0.6037539946001986
+
+            Best model @ Epoch: 45
+            Metrics:	Train	Valid
+            Loss	0.0546	0.0715
+            mIOU	0.8634	0.8465
+            pxl_acc	0.9803	0.9741
+            
+IOU of ground Class: 0.9815326739329819
+IOU of advertisement Class: 0.9577727624776707
+IOU of audience Class: 0.9727610136147548
+IOU of football post Class: 0.8631790991323293
+IOU of team A Class: 0.9147305887419556
+IOU of goal keeper A Class: 0.6199197391290354
+IOU of team B Class: 0.8963456717511319
+IOU of goal keeper B Class: 0.7537897716217965
+IOU of refree Class: 0.5400866876766671
+IOU of football Class: 0.6199002537370191
+
+            Best model @ Epoch: 46
+            Metrics:	Train	Valid
+            Loss	0.0542	0.0670
+            mIOU	0.8647	0.8520
+            pxl_acc	0.9804	0.9760
+            
+IOU of ground Class: 0.9813394890064269
+IOU of advertisement Class: 0.9581068975958178
+IOU of audience Class: 0.9729139776875045
+IOU of football post Class: 0.8637550438544254
+IOU of team A Class: 0.914497316816515
+IOU of goal keeper A Class: 0.6151053684411697
+IOU of team B Class: 0.8947688667912191
+IOU of goal keeper B Class: 0.7479069308356606
+IOU of refree Class: 0.5383000436911473
+IOU of football Class: 0.6482090138365456
+
+            Best model @ Epoch: 47
+            Metrics:	Train	Valid
+            Loss	0.0529	0.0681
+            mIOU	0.8660	0.8605
+            pxl_acc	0.9807	0.9759
+            
+IOU of ground Class: 0.9816776567272806
+IOU of advertisement Class: 0.9585440152463018
+IOU of audience Class: 0.9739251890851848
+IOU of football post Class: 0.8637510312694918
+IOU of team A Class: 0.9141207745992522
+IOU of goal keeper A Class: 0.6230991108485764
+IOU of team B Class: 0.8997280159008181
+IOU of goal keeper B Class: 0.7587024354392194
+IOU of refree Class: 0.5265132918968881
+IOU of football Class: 0.6472666931639183
+
+            Best model @ Epoch: 48
+            Metrics:	Train	Valid
+            Loss	0.0511	0.0729
+            mIOU	0.8731	0.8497
+            pxl_acc	0.9812	0.9743
+            
+IOU of ground Class: 0.9821136655106721
+IOU of advertisement Class: 0.960024669217978
+IOU of audience Class: 0.9741209233420548
+IOU of football post Class: 0.8626972417245771
+IOU of team A Class: 0.9177847985251005
+IOU of goal keeper A Class: 0.6281572499971826
+IOU of team B Class: 0.9013932584351493
+IOU of goal keeper B Class: 0.7652418803976029
+IOU of refree Class: 0.5359642757449968
+IOU of football Class: 0.6864229572374824
+
+            Best model @ Epoch: 54
+            Metrics:	Train	Valid
+            Loss	0.0508	0.0691
+            mIOU	0.8797	0.8525
+            pxl_acc	0.9812	0.9748
+            
+IOU of ground Class: 0.9820109188421234
+IOU of advertisement Class: 0.9582765479435331
+IOU of audience Class: 0.973634071529078
+IOU of football post Class: 0.8659635275314416
+IOU of team A Class: 0.9172489696608322
+IOU of goal keeper A Class: 0.6385247336078614
+IOU of team B Class: 0.902991384183178
+IOU of goal keeper B Class: 0.7706862083762426
+IOU of refree Class: 0.5438456640183766
+IOU of football Class: 0.7232071496727954
+
+            Best model @ Epoch: 55
+            Metrics:	Train	Valid
+            Loss	0.0499	0.0641
+            mIOU	0.8769	0.8652
+            pxl_acc	0.9814	0.9768
+            
+IOU of ground Class: 0.9823291023545333
+IOU of advertisement Class: 0.9591787687857073
+IOU of audience Class: 0.9751103684219826
+IOU of football post Class: 0.8668479629598927
+IOU of team A Class: 0.9166281876155877
+IOU of goal keeper A Class: 0.6426477068085581
+IOU of team B Class: 0.905078718397352
+IOU of goal keeper B Class: 0.7627004984535802
+IOU of refree Class: 0.5443550965328944
+IOU of football Class: 0.695978597060269
+
+            Best model @ Epoch: 56
+            Metrics:	Train	Valid
+            Loss	0.0489	0.0649
+            mIOU	0.8803	0.8624
+            pxl_acc	0.9818	0.9770
+            
+IOU of ground Class: 0.9824921005366228
+IOU of advertisement Class: 0.9592867259006334
+IOU of audience Class: 0.9745276942417103
+IOU of football post Class: 0.8745471655109188
+IOU of team A Class: 0.9211433791527002
+IOU of goal keeper A Class: 0.6366174489056938
+IOU of team B Class: 0.9071160059442801
+IOU of goal keeper B Class: 0.7682149760244088
+IOU of refree Class: 0.5568836155036244
+IOU of football Class: 0.7018469024388331
+
+            Best model @ Epoch: 58
+            Metrics:	Train	Valid
+            Loss	0.0474	0.0604
+            mIOU	0.8828	0.8754
+            pxl_acc	0.9823	0.9782
+            
+IOU of ground Class: 0.9829872156985715
+IOU of advertisement Class: 0.9620299849786383
+IOU of audience Class: 0.97571305734092
+IOU of football post Class: 0.880060005285112
+IOU of team A Class: 0.9210459452540186
+IOU of goal keeper A Class: 0.6399141287833321
+IOU of team B Class: 0.9052564366932457
+IOU of goal keeper B Class: 0.7709547807094715
+IOU of refree Class: 0.5515300487412165
+IOU of football Class: 0.7147802575948392
+
+            Best model @ Epoch: 59
+            Metrics:	Train	Valid
+            Loss	0.0470	0.0599
+            mIOU	0.8861	0.8663
+            pxl_acc	0.9823	0.9782
+            
+IOU of ground Class: 0.9830551218997937
+IOU of advertisement Class: 0.9613813126688416
+IOU of audience Class: 0.9749952291519598
+IOU of football post Class: 0.8771762599934838
+IOU of team A Class: 0.9229245162500115
+IOU of goal keeper A Class: 0.6382476825213942
+IOU of team B Class: 0.9059199906818828
+IOU of goal keeper B Class: 0.7755881034923029
+IOU of refree Class: 0.5582983954847615
+IOU of football Class: 0.7396842097683253
+
+            Best model @ Epoch: 64
+            Metrics:	Train	Valid
+            Loss	0.0455	0.0600
+            mIOU	0.8890	0.8768
+            pxl_acc	0.9827	0.9785
+            
+IOU of ground Class: 0.9835922372429603
+IOU of advertisement Class: 0.9628557063607037
+IOU of audience Class: 0.9764182193867643
+IOU of football post Class: 0.8827151402411545
+IOU of team A Class: 0.9227366788239095
+IOU of goal keeper A Class: 0.6549088441584813
+IOU of team B Class: 0.9070513625520374
+IOU of goal keeper B Class: 0.77776381585617
+IOU of refree Class: 0.558999345711863
+IOU of football Class: 0.737913783871873
+
+            Best model @ Epoch: 65
+            Metrics:	Train	Valid
+            Loss	0.0449	0.0630
+            mIOU	0.8927	0.8768
+            pxl_acc	0.9830	0.9774
+            
+IOU of ground Class: 0.9832578396198278
+IOU of advertisement Class: 0.9646568668289967
+IOU of audience Class: 0.9771250209377025
+IOU of football post Class: 0.8831083440832808
+IOU of team A Class: 0.9222135034249386
+IOU of goal keeper A Class: 0.6607531543827478
+IOU of team B Class: 0.9101885538563942
+IOU of goal keeper B Class: 0.7823096094019518
+IOU of refree Class: 0.5570387856730878
+IOU of football Class: 0.7584945915863543
+
+            Best model @ Epoch: 66
+            Metrics:	Train	Valid
+            Loss	0.0448	0.0585
+            mIOU	0.8888	0.8821
+            pxl_acc	0.9829	0.9788
+            
+IOU of ground Class: 0.9828302471334689
+IOU of advertisement Class: 0.9628719942498984
+IOU of audience Class: 0.9763173886961589
+IOU of football post Class: 0.885388820046312
+IOU of team A Class: 0.9230661768430498
+IOU of goal keeper A Class: 0.6615460530698225
+IOU of team B Class: 0.9081468661500798
+IOU of goal keeper B Class: 0.78093084222832
+IOU of refree Class: 0.5498583219121377
+IOU of football Class: 0.7325339607640822
+
+            Best model @ Epoch: 67
+            Metrics:	Train	Valid
+            Loss	0.0426	0.0581
+            mIOU	0.8967	0.8784
+            pxl_acc	0.9838	0.9788
+            
+IOU of ground Class: 0.9837306889598787
+IOU of advertisement Class: 0.9651112242315086
+IOU of audience Class: 0.9779692776307884
+IOU of football post Class: 0.8852502815921182
+IOU of team A Class: 0.9263410928480205
+IOU of goal keeper A Class: 0.680011853806289
+IOU of team B Class: 0.9156724297339424
+IOU of goal keeper B Class: 0.77854900900182
+IOU of refree Class: 0.5583027609433799
+IOU of football Class: 0.7679466678899014
+
+            Best model @ Epoch: 72
+            Metrics:	Train	Valid
+            Loss	0.0411	0.0550
+            mIOU	0.8989	0.8769
+            pxl_acc	0.9842	0.9799
+            
+IOU of ground Class: 0.9844745444548985
+IOU of advertisement Class: 0.9660631699369412
+IOU of audience Class: 0.9785532716860821
+IOU of football post Class: 0.8873975397360483
+IOU of team A Class: 0.9286728963983756
+IOU of goal keeper A Class: 0.6717203452353392
+IOU of team B Class: 0.9164496683958402
+IOU of goal keeper B Class: 0.7876616636243916
+IOU of refree Class: 0.5647485434905902
+IOU of football Class: 0.7729832040525305
+
+            Best model @ Epoch: 73
+            Metrics:	Train	Valid
+            Loss	0.0408	0.0577
+            mIOU	0.8990	0.8816
+            pxl_acc	0.9843	0.9790
+            
+IOU of ground Class: 0.9847503168123367
+IOU of advertisement Class: 0.9660752605392726
+IOU of audience Class: 0.9785384027756807
+IOU of football post Class: 0.891870866035875
+IOU of team A Class: 0.9286328704857519
+IOU of goal keeper A Class: 0.671181510841083
+IOU of team B Class: 0.9156145128838236
+IOU of goal keeper B Class: 0.7897056729741664
+IOU of refree Class: 0.5659095107944739
+IOU of football Class: 0.7668322829814058
+
+            Best model @ Epoch: 74
+            Metrics:	Train	Valid
+            Loss	0.0405	0.0587
+            mIOU	0.9022	0.8746
+            pxl_acc	0.9843	0.9783
+            
+IOU of ground Class: 0.9846718913234754
+IOU of advertisement Class: 0.9663321455507352
+IOU of audience Class: 0.978386994131985
+IOU of football post Class: 0.8893475405229918
+IOU of team A Class: 0.9281112480891823
+IOU of goal keeper A Class: 0.6770544906695722
+IOU of team B Class: 0.915838444785525
+IOU of goal keeper B Class: 0.7989714333297507
+IOU of refree Class: 0.5678881223981296
+IOU of football Class: 0.7848547135334238
+
+            Best model @ Epoch: 76
+            Metrics:	Train	Valid
+            Loss	0.0398	0.0539
+            mIOU	0.9023	0.8914
+            pxl_acc	0.9847	0.9803
+            
+IOU of ground Class: 0.985181961866921
+IOU of advertisement Class: 0.9675615438627049
+IOU of audience Class: 0.978746428269308
+IOU of football post Class: 0.893607343391254
+IOU of team A Class: 0.9302138525965429
+IOU of goal keeper A Class: 0.6832361189482908
+IOU of team B Class: 0.915482901350536
+IOU of goal keeper B Class: 0.7935893445781282
+IOU of refree Class: 0.5690464927413766
+IOU of football Class: 0.7758544152698728
+
+            Best model @ Epoch: 77
+            Metrics:	Train	Valid
+            Loss	0.0391	0.0553
+            mIOU	0.9037	0.8902
+            pxl_acc	0.9848	0.9796
+            
+IOU of ground Class: 0.9850026803382007
+IOU of advertisement Class: 0.9672768103565822
+IOU of audience Class: 0.979739215807495
+IOU of football post Class: 0.895812204072927
+IOU of team A Class: 0.9303478997160904
+IOU of goal keeper A Class: 0.684892854017582
+IOU of team B Class: 0.9196201646265366
+IOU of goal keeper B Class: 0.7926020174263975
+IOU of refree Class: 0.5709182013694256
+IOU of football Class: 0.778535934151455
+
+            Best model @ Epoch: 78
+            Metrics:	Train	Valid
+            Loss	0.0391	0.0550
+            mIOU	0.9062	0.8834
+            pxl_acc	0.9848	0.9800
+            
+IOU of ground Class: 0.9850811238891602
+IOU of advertisement Class: 0.9668792158995092
+IOU of audience Class: 0.9792679491723386
+IOU of football post Class: 0.8961924039788002
+IOU of team A Class: 0.9305196261963332
+IOU of goal keeper A Class: 0.6882901645295036
+IOU of team B Class: 0.917948463602479
+IOU of goal keeper B Class: 0.8033514246031901
+IOU of refree Class: 0.5684509843389479
+IOU of football Class: 0.7945849667435488
+
+            Best model @ Epoch: 98
+            Metrics:	Train	Valid
+            Loss	0.0383	0.0557
+            mIOU	0.9081	0.8844
+            pxl_acc	0.9850	0.9794
+            
+IOU of ground Class: 0.9849523138286286
+IOU of advertisement Class: 0.9673300392134162
+IOU of audience Class: 0.9797620940810308
+IOU of football post Class: 0.8981779335919138
+IOU of team A Class: 0.9303253850288844
+IOU of goal keeper A Class: 0.6978713141831357
+IOU of team B Class: 0.919646901309878
+IOU of goal keeper B Class: 0.803955030534543
+IOU of refree Class: 0.569377324914799
+IOU of football Class: 0.7959877300350946
+
+            Best model @ Epoch: 99
+            Metrics:	Train	Valid
+            Loss	0.0381	0.0545
+            mIOU	0.9082	0.8840
+            pxl_acc	0.9851	0.9801
+            
+IOU of ground Class: 0.984970912378125
+IOU of advertisement Class: 0.9678837573138303
+IOU of audience Class: 0.9799314491907263
+IOU of football post Class: 0.902520723611016
+IOU of team A Class: 0.931397481502306
+IOU of goal keeper A Class: 0.6894366666860781
+IOU of team B Class: 0.9207845365509275
+IOU of goal keeper B Class: 0.8022005953186533
+IOU of refree Class: 0.5706776710120776
+IOU of football Class: 0.797716834637922
