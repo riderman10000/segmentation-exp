@@ -332,7 +332,7 @@ if __name__ == "__main__":
         265.58,
         880.07]
     # loss_func = lambda logits, masks : (nn.CrossEntropyLoss(weight= torch.tensor(class_weights, device=device))(logits, masks)) # + DiceLoss(mode='multiclass')(logits, masks))
-    loss_func = lambda logits, masks : (nn.CrossEntropyLoss()(logits, masks)) # + DiceLoss(mode='multiclass')(logits, masks))
+    loss_func = lambda logits, masks : (nn.CrossEntropyLoss()(logits, masks) + DiceLoss(mode='multiclass')(logits, masks))
     
     # metrics 
     metrics = Metrics(loss_func=loss_func, no_of_class=len(color_class_mapping))
