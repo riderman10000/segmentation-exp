@@ -223,7 +223,7 @@ if __name__ == "__main__":
     image_size = 512 
     epochs = 100
     batch_size = 4
-    learning_rate = 0.001 # 0.0005
+    learning_rate = 0.0005 # 0.0005
     no_of_classes = len(color_class_mapping)
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     
     n_times = 2 # increase the datasize by n times
 
-    save_dirs = './runs/exp-c-optim/iteration-8'
+    save_dirs = './runs/exp-c-optim/iteration-9'
     # albumentation_letterbox = 
     def custom_transform(data, **kwargs):
         kwargs['resized_width'] = image_size,
@@ -247,18 +247,23 @@ if __name__ == "__main__":
         #     image=custom_transform,
         #     mask=custom_transform,
         #     p=1),
-        # A.OneOf([
-        #     A.ElasticTransform(alpha=120, sigma=120 * 0.05, alpha_affine=120 * 0.03, p=0.5),
-        #     A.GridDistortion(p=0.5),
-        #     # A.OpticalDistortion(distort_limit=2, shift_limit=0.5, p=0.5),
-        # ], p=0.8),    
+        
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5),
+
+        A.OneOf([
+            A.ElasticTransform(alpha=120, sigma=120 * 0.05, alpha_affine=120 * 0.03, p=0.2),
+            A.GridDistortion(p=0.2),
+            # A.OpticalDistortion(distort_limit=2, shift_limit=0.5, p=0.5),
+        ], p=0.8),    
+
+       
         A.Sharpen(alpha=(0.2, 0.5), lightness=(0.5, 1.0), p=0.6),
         A.RandomBrightnessContrast(p=0.8),
         
         A.Blur(blur_limit=(1, 5), p=0.75),
         A.CLAHE(clip_limit=(1, 4), tile_grid_size=(8, 8), p=0.25),
+        
         # A.Rotate(limit=(-90, 90), interpolation=0, border_mode=0, value=(0, 0, 0), mask_value=None, rotate_method='largest_box', crop_border=False, p=1.0),
         # A.SafeRotate(limit=(-45, 45), interpolation=0, border_mode=0, value=(0, 0, 0), p=0.6),
         A.ChannelShuffle(p=0.25),
@@ -326,7 +331,8 @@ if __name__ == "__main__":
         90.38,
         265.58,
         880.07]
-    loss_func = lambda logits, masks : (nn.CrossEntropyLoss(weight= torch.tensor(class_weights, device=device))(logits, masks)) # + DiceLoss(mode='multiclass')(logits, masks))
+    # loss_func = lambda logits, masks : (nn.CrossEntropyLoss(weight= torch.tensor(class_weights, device=device))(logits, masks)) # + DiceLoss(mode='multiclass')(logits, masks))
+    loss_func = lambda logits, masks : (nn.CrossEntropyLoss()(logits, masks)) # + DiceLoss(mode='multiclass')(logits, masks))
     
     # metrics 
     metrics = Metrics(loss_func=loss_func, no_of_class=len(color_class_mapping))

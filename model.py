@@ -11,7 +11,13 @@ class SegmentationModel(nn.Module):
             in_channels= in_channels, 
             classes= classes
         )
-        # self.loss_fn = smp.losses.DiceLoss(mode='multiclass', from_logits=True)
+
+        # self.model = smp.DeepLabV3(
+        #     encoder_name=encoder,
+        #     encoder_weights=weights, 
+        #     in_channels= in_channels,   
+        #     classes=classes,
+        # )
         
     def forward(self, image, mask = None):
         pred = self.model(image) 
