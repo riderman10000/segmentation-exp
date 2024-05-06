@@ -10,14 +10,28 @@ import torch
 import torch.utils
 import torch.utils.data
 from torchvision import transforms 
+from torch.nn import functional as F 
 from torch.utils.data import DataLoader
 
 from model import SegmentationModel
 from football_dataset import FootballDataset
 
+class_color_mapping = {
+    0 : (137, 126, 126), # ground
+    1 : (27,  71, 151), # advertisement
+    2 : (111,  48, 253), # audience
+    3 : (255,   0, 29), # football post
+    4 : (255, 160, 1), # team A # orange | goal keeper in green of MU
+    5 : (255, 159, 0), #  goal keeper in green of MU keeper
+    6 : (254, 233, 3), # team B # yellow | goal keeper in yellow of RMA
+    7 : (255, 235, 0), #  goal keeper in yellow of RMA
+    8 : (238, 171, 171), # refree pink
+    9 : (201,  19, 223), # football
+}
+
 image_size = 512 
 device = 'cuda' if torch.cuda.is_available() else 'cpu' 
-iteration_path = './runs/exp-optimize/iteration-2'
+iteration_path = './runs/exp-c-optim/iteration-2'
 
 video_capture = cv2.VideoCapture('./video/game.mp4')
 if not (video_capture.isOpened()):
@@ -59,11 +73,11 @@ while video_capture.isOpened():
     ret, frame = video_capture.read()
     if ret:
         transformations = A.Compose([
-            # A.Resize(image_size, image_size),
-            A.Lambda(name='Letter Box', 
-                image=custom_transform,
-                mask=custom_transform,
-                p=1),
+            A.Resize(image_size, image_size),
+            # A.Lambda(name='Letter Box', 
+            #     image=custom_transform,
+            #     mask=custom_transform,
+            #     p=1),
             ToTensorV2(),
         ])
         original_frame = deepcopy(frame)
@@ -73,9 +87,16 @@ while video_capture.isOpened():
             segmentation_model.eval()
             transformed_image = transformed_image.to(device)
             
-            segmented_image = segmentation_model(transformed_image)
-            segmented_image = segmented_image.squeeze().permute(1, 2, 0)
-            segmented_image = segmented_image.cpu().numpy().astype(np.uint8) * 255
+            prediction = segmentation_model(transformed_image)
+            segmented_mask = torch.argmax(F.softmax(prediction, dim=1), dim=1)
+            segmented_mask = segmented_mask.permute(1, 2, 0).detach().cpu().numpy()
+            _h, _w, _c = segmented_mask.shape
+            segmented_image = np.zeros((_h, _w, 3))
+            for row in range(_h):
+                for col in range(_w):
+                    segmented_image[row, col] = np.array(class_color_mapping[segmented_mask[row, col, 0]])
+            segmented_image = segmented_image.astype(np.uint8)
+
             cv2.imshow('game', segmented_image[:,:,::-1])
             cv2.imshow('test', cv2.resize(original_frame, (image_size, image_size)))
             video_out.write(cv2.resize(segmented_image[:,:,::-1], (640, 480)).astype(np.uint8))
