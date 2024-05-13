@@ -59,11 +59,15 @@ The training log is provided in `exp-c-optim/iteration-5`. And the results:
 
 
 the original video
-<video width="320" height="240" controls>
+![](./video/game1.mp4)
+
+
+<!-- <video width="320" height="240" controls>
   <source src="./video/game1.mp4" type="video/mp4">
-</video>
+</video> -->
 
 Infer video 
 <video width="320" height="240" controls>
   <source src="./video/output1.avi" type="video/mp4">
 </video>
+![](./video/output1.avi)
