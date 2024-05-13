@@ -59,7 +59,13 @@ The training log is provided in `exp-c-optim/iteration-5`. And the results:
 
 
 the original video
+
+
 ![](./video/game1_.gif)
 
-Infer video 
+
+Infer video
+
+
+
 ![](./video/output1_.gif)
